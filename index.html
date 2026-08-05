@@ -295,7 +295,7 @@ to { transform: rotate(360deg); } }
   <main class="work-list">
     <div class="work-item full" onclick="openLb('v1')">
       <video autoplay muted loop playsinline preload="metadata" poster="stills/nike.jpg">
-        <source src="videos/nike_preview.mp4" type="video/mp4">
+        <source src="videos/nike_full.mp4" type="video/mp4">
       </video>
       <div class="work-item-info">
         <span class="work-item-client">Nike</span>
@@ -304,7 +304,7 @@ to { transform: rotate(360deg); } }
       </div>
     </div><div class="clearfix"><div class="work-item half-left" onclick="openLb('v2')">
       <video autoplay muted loop playsinline preload="metadata" poster="stills/ggd.jpg">
-        <source src="videos/ggd_preview.mp4" type="video/mp4">
+        <source src="videos/ggd_full.mp4" type="video/mp4">
       </video>
       <div class="work-item-info">
         <span class="work-item-client">GGD Twente</span>
@@ -313,7 +313,7 @@ to { transform: rotate(360deg); } }
       </div>
     </div><div class="work-item half-right" onclick="openLb('v3')">
       <video autoplay muted loop playsinline preload="metadata" poster="stills/hightech.jpg">
-        <source src="videos/hightech_preview.mp4" type="video/mp4">
+        <source src="videos/hightech_full.mp4" type="video/mp4">
       </video>
       <div class="work-item-info">
         <span class="work-item-client">High Tech Twente</span>
@@ -322,7 +322,7 @@ to { transform: rotate(360deg); } }
       </div>
     </div></div><div class="work-item full" onclick="openLb('v4')">
       <video autoplay muted loop playsinline preload="metadata" poster="stills/lenferink.jpg">
-        <source src="videos/lenferink_preview.mp4" type="video/mp4">
+        <source src="videos/lenferink-full.m4v" type="video/mp4">
       </video>
       <div class="work-item-info">
         <span class="work-item-client">Lenferink</span>
@@ -331,7 +331,7 @@ to { transform: rotate(360deg); } }
       </div>
     </div><div class="clearfix"><div class="work-item half-left" onclick="openLb('v5')">
       <video autoplay muted loop playsinline preload="metadata" poster="stills/philley.jpg">
-        <source src="videos/philley_preview.mp4" type="video/mp4">
+        <source src="videos/philley_full.mp4" type="video/mp4">
       </video>
       <div class="work-item-info">
         <span class="work-item-client">Philley</span>
@@ -340,7 +340,7 @@ to { transform: rotate(360deg); } }
       </div>
     </div><div class="work-item half-right" onclick="openLb('v6')">
       <video autoplay muted loop playsinline preload="metadata" poster="stills/safandarley.jpg">
-        <source src="videos/safandarley_preview.mp4" type="video/mp4">
+        <source src="videos/safandarley_full.mp4" type="video/mp4">
       </video>
       <div class="work-item-info">
         <span class="work-item-client">SafanDarley</span>
@@ -607,6 +607,14 @@ function positionCircle() {
 positionCircle();
 window.addEventListener('resize', positionCircle);
 setTimeout(positionCircle, 300);
+
+
+// Grid videos: loop only the first 10 seconds
+document.querySelectorAll('.work-item video').forEach(v => {
+  v.addEventListener('timeupdate', () => {
+    if (v.currentTime >= 10) v.currentTime = 0;
+  });
+});
 
 </script>
 </body>
