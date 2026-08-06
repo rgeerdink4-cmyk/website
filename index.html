@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v8 -->
+<!-- versie: 2026-08-06-mobiel-v9-debug -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -299,6 +299,14 @@ to { transform: rotate(360deg); } }
   .click-burst { display: none !important; }
 }
 .about-span { grid-column: 1 / -1; margin-top: 40px; }
+
+#css-debug { position: fixed; left: 8px; bottom: 8px; z-index: 99999; font: 11px/1 monospace;
+             padding: 6px 9px; border-radius: 4px; background: #b00; color: #fff; }
+#css-debug::after { content: 'DESKTOP CSS'; }
+@media (max-width: 1024px) {
+  #css-debug { background: #00FF87; color: #000; }
+  #css-debug::after { content: 'MOBIEL CSS ACTIEF'; }
+}
 </style>
 </head>
 <body>
@@ -311,6 +319,7 @@ to { transform: rotate(360deg); } }
   </a>
 </div>
 <div id="nav-circle" style="position:absolute;width:200px;height:200px;border-radius:50%;background:#0a0a0a;z-index:499;pointer-events:none;transition:opacity 0.4s;"></div>
+<div id="css-debug"></div>
 <div id="cursor"></div>
 
 <nav>
@@ -741,7 +750,31 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v8 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v9-debug ', 'background:#00FF87;color:#000');
+
+// Photo above text on narrow screens, regardless of CSS support
+(function () {
+  const mid = document.querySelector('.about-mid');
+  if (!mid) return;
+  const mq = window.matchMedia('(max-width: 1024px)');
+  function apply() {
+    const photo = mid.querySelector('.about-photo-col');
+    const text  = mid.querySelector('.about-text-col');
+    if (!photo || !text) return;
+    if (mq.matches) {
+      mid.style.display = 'block';
+      if (photo.nextElementSibling !== text) mid.insertBefore(photo, text);
+      photo.style.marginBottom = '32px';
+    } else {
+      mid.style.display = '';
+      photo.style.marginBottom = '';
+    }
+  }
+  apply();
+  mq.addEventListener ? mq.addEventListener('change', apply) : mq.addListener(apply);
+  window.addEventListener('resize', apply);
+})();
+
 </script>
 </body>
 </html>
