@@ -617,17 +617,24 @@ window.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Position circle behind logo
+// Position circle behind logo.
+// The nav is fixed, so the logo's viewport rect is constant. That rect IS the
+// circle's document position, so scrollY must not be added here - doing so put
+// the circle way down the page when reloading while already scrolled.
 function positionCircle() {
   const circle = document.getElementById('nav-circle');
   const logo = document.getElementById('lottie-logo');
   if (!circle || !logo) return;
   const r = logo.getBoundingClientRect();
-  circle.style.left = (r.left + r.width/2 - 100) + 'px';
-  circle.style.top = (r.top + r.height/2 - 100 + window.scrollY) + 'px';
+  if (!r.width) return;
+  circle.style.left = (r.left + r.width / 2 - 100) + 'px';
+  circle.style.top  = (r.top + r.height / 2 - 100) + 'px';
+  circle.style.opacity = window.scrollY > 60 ? '0' : '1';
 }
-positionCircle();
+// Browsers restore scroll position after load, so settle first, then measure.
+window.addEventListener('load', () => requestAnimationFrame(positionCircle));
 window.addEventListener('resize', positionCircle);
+positionCircle();
 setTimeout(positionCircle, 300);
 
 
