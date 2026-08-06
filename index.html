@@ -634,12 +634,18 @@ setTimeout(positionCircle, 300);
 // Grid videos: loop a 10 second window, with an optional start offset per video
 document.querySelectorAll('.work-item video').forEach(v => {
   const start = parseFloat(v.dataset.start || 0);
-  const setStart = () => { if (v.currentTime < start) v.currentTime = start; };
-  v.addEventListener('loadedmetadata', setStart);
-  if (v.readyState >= 1) setStart();
+  if (start > 0) {
+    v.removeAttribute('loop');           // native loop would jump back to 0
+    const seek = () => { if (v.currentTime < start) v.currentTime = start; };
+    v.addEventListener('loadedmetadata', seek);
+    v.addEventListener('canplay', seek);
+    v.addEventListener('play', seek);
+    if (v.readyState >= 1) seek();
+  }
   v.addEventListener('timeupdate', () => {
-    if (v.currentTime >= start + 10) v.currentTime = start;
+    if (v.currentTime >= start + 10) { v.currentTime = start; v.play().catch(()=>{}); }
   });
+  v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
 </script>
