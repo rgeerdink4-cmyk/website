@@ -258,10 +258,18 @@ to { transform: rotate(360deg); } }
 
 
 @media (max-width: 900px) {
-  .about-mid { grid-template-columns: 1fr; }
-  
+  /* Stack the about section with the photo above the text */
+  .about-mid { display: flex; flex-direction: column-reverse; }
   .tools { grid-template-columns: repeat(2, 1fr); }
   .expertise-grid { grid-template-columns: 1fr; }
+}
+
+/* Touch devices: no custom cursor, no click burst, restore the native pointer */
+@media (hover: none), (pointer: coarse) {
+  *, *::before, *::after { cursor: auto !important; }
+  a, button, .work-item { cursor: pointer !important; }
+  #cursor { display: none !important; }
+  .click-burst { display: none !important; }
 }
 </style>
 </head>
@@ -553,7 +561,9 @@ document.querySelectorAll('a, button, .work-item').forEach(el => {
 });
 
 // BURST
+const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
 document.addEventListener('click', e => {
+  if (isTouch) return;
   const burst = document.createElement('div');
   burst.className='click-burst';
   burst.style.left=e.clientX+'px'; burst.style.top=e.clientY+'px';
