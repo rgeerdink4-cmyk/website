@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v9-debug -->
+<!-- versie: 2026-08-06-mobiel-v10 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -61,7 +61,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; a
 .reel-play-btn svg { margin-left: 4px; }
 
 /* ABOUT */
-.about-page { max-width: 820px; margin: 0 auto; width: 100%; box-sizing: border-box; position: relative; overflow-x: hidden; padding: 160px 40px 80px; display: flex; flex-direction: column; }
+.about-page { max-width: 960px; margin: 0 auto; width: 100%; box-sizing: border-box; position: relative; overflow-x: hidden; padding: 160px 40px 80px; display: flex; flex-direction: column; }
 .about-heading { font-family: 'Amarante', cursive; font-weight: 400; font-size: clamp(28px, 3.5vw, 48px); text-transform: uppercase; color: var(--accent); line-height: 1; margin-bottom: 6px; }
 .about-top { margin-bottom: 32px; }
 .about-mid { display: grid; grid-template-columns: 1fr 0.7fr; gap: 40px; align-items: start; margin-bottom: 48px; width: 100%; }
@@ -267,15 +267,21 @@ to { transform: rotate(360deg); } }
   .about-photo-col { order: 0 !important; margin-bottom: 32px; }
   .about-text-col { order: 0 !important; }
   .about-photo { max-width: 100%; }
-  .photo-wrap { max-width: 340px; margin: 0 auto; }
-  .about-body { font-size: 15px !important; line-height: 1.75 !important; max-width: 100% !important; }
+  /* Photo centred, text justified across the full width */
+  .photo-wrap { max-width: 360px; margin: 0 auto 4px; }
+  .about-text-col { width: 100%; }
+  .about-body { font-size: 16px !important; line-height: 1.8 !important; max-width: 100% !important;
+                text-align: justify; hyphens: auto; }
   .about-heading { font-size: clamp(30px, 9vw, 44px) !important; }
   /* Expertise and Toolbox stacked (inline grid style needs overriding) */
   .about-bottom { display: block !important; }
   .about-bottom > div { margin-bottom: 36px; }
   .about-span { grid-column: auto !important; }
-  .expertise-grid { grid-template-columns: 1fr 1fr !important; }
-  .tools { grid-template-columns: repeat(3, 1fr) !important; }
+  .expertise-grid { grid-template-columns: 1fr !important; }
+  .expertise-item { font-size: 17px !important; padding: 15px 0 !important; }
+  .tools { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+  .tool { font-size: 17px !important; padding: 14px 10px !important; text-align: center; }
+  .about-section-label { font-size: 11px !important; margin-bottom: 14px !important; }
   /* The logo makes the nav tall, so push content clear of it */
   nav { padding: 28px 20px !important; gap: 18px !important; }
   .about-page { padding: 210px 24px 60px !important; }
@@ -286,8 +292,6 @@ to { transform: rotate(360deg); } }
 }
 
 @media (max-width: 600px) {
-  .expertise-grid { grid-template-columns: 1fr !important; }
-  .tools { grid-template-columns: repeat(2, 1fr) !important; }
   .about-page { padding: 190px 18px 50px !important; }
 }
 
@@ -300,13 +304,6 @@ to { transform: rotate(360deg); } }
 }
 .about-span { grid-column: 1 / -1; margin-top: 40px; }
 
-#css-debug { position: fixed; left: 8px; bottom: 8px; z-index: 99999; font: 11px/1 monospace;
-             padding: 6px 9px; border-radius: 4px; background: #b00; color: #fff; }
-#css-debug::after { content: 'DESKTOP CSS'; }
-@media (max-width: 1024px) {
-  #css-debug { background: #00FF87; color: #000; }
-  #css-debug::after { content: 'MOBIEL CSS ACTIEF'; }
-}
 </style>
 </head>
 <body>
@@ -319,7 +316,6 @@ to { transform: rotate(360deg); } }
   </a>
 </div>
 <div id="nav-circle" style="position:absolute;width:200px;height:200px;border-radius:50%;background:#0a0a0a;z-index:499;pointer-events:none;transition:opacity 0.4s;"></div>
-<div id="css-debug"></div>
 <div id="cursor"></div>
 
 <nav>
@@ -471,7 +467,6 @@ to { transform: rotate(360deg); } }
     <div class="about-text-col">
       <p class="about-body reveal">Al ruim 10 jaar werk ik als animator/motion designer. In die tijd heb ik aan veel verschillende producties gewerkt, van motion graphics en explanimations tot VFX, character animation, illustratie en video editing.</p>
       <p class="about-body reveal">Ik heb projecten mogen maken voor onder andere Nike, ABN AMRO, Vredestein, Universiteit Twente en TKH. Ik denk graag conceptueel mee, maar vind ik het minstens zo leuk om ideeën uit te werken tot een doeltreffende en aantrekkelijke animatie.</p>
-      <p class="about-body reveal">Mijn dagelijkse gereedschap bestaat vooral uit After Effects, Illustrator en Premiere Pro. Daarnaast ben ik niet vreemd met plugins zoals RubberHose, Element 3D en Lottie. Ik vind het belangrijk om te blijven groeien, en volg de ontwikkelingen rondom AI en onderzoek ik hoe deze mijn workflow kunnen verbeteren. Ook wil ik me verder verdiepen in de wereld van 3D, en heb ik affiniteit met fotografie en filmproductie.</p>
     </div>
   </div>
   <div class="about-bottom">
@@ -750,7 +745,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v9-debug ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v10 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
