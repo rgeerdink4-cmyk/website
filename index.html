@@ -267,6 +267,9 @@ to { transform: rotate(360deg); } }
   .about-page { padding: 220px 24px 60px; }
   .work-list { padding: 220px 10px 10px; }
   .nav-link { font-size: 16px; }
+  /* Expertise and Toolbox stack instead of sitting side by side.
+     !important is needed because about-bottom carries an inline grid style. */
+  .about-bottom { grid-template-columns: 1fr !important; gap: 32px !important; }
 }
 
 /* Touch devices: no custom cursor, no click burst, restore the native pointer */
