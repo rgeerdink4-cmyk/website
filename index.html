@@ -631,21 +631,29 @@ window.addEventListener('resize', positionCircle);
 setTimeout(positionCircle, 300);
 
 
-// Grid videos: loop a 10 second window, with an optional start offset per project
-const startOffsets = { nike: 0.8, ggd: 4, hightech: 6 };
+// Grid videos: loop a 10 second window, starting at a per-project offset
+const startOffsets = { nike: 0.8, ggd: 4, hightech: 6, safandarley: 0.5 };
 document.querySelectorAll('.work-item video').forEach(v => {
   const first = v.querySelector('source');
   const file = first ? first.getAttribute('src') : '';
   const key = Object.keys(startOffsets).find(k => file.indexOf(k) === 0);
   const start = key ? startOffsets[key] : 0;
+
   if (start > 0) {
-    v.removeAttribute('loop');           // native loop would jump back to 0
-    const seek = () => { if (v.currentTime < start) v.currentTime = start; };
+    // Hold on the poster until the video has actually reached the offset,
+    // otherwise the browser flashes frame 0 while it seeks.
+    v.removeAttribute('autoplay');
+    v.removeAttribute('loop');
+    v.pause();
+    let ready = false;
+    const seek = () => { if (!ready && v.readyState >= 1) v.currentTime = start; };
     v.addEventListener('loadedmetadata', seek);
-    v.addEventListener('canplay', seek);
-    v.addEventListener('play', seek);
-    if (v.readyState >= 1) seek();
+    v.addEventListener('seeked', () => {
+      if (!ready && v.currentTime >= start - 0.05) { ready = true; v.play().catch(()=>{}); }
+    });
+    seek();
   }
+
   v.addEventListener('timeupdate', () => {
     if (v.currentTime >= start + 10) { v.currentTime = start; v.play().catch(()=>{}); }
   });
