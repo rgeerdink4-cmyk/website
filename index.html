@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v26 -->
+<!-- versie: 2026-08-06-mobiel-v27 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -287,8 +287,11 @@ to { transform: rotate(360deg); } }
   .about-page { padding: 210px 24px 60px !important; }
   .work-list { padding: 210px 10px 10px !important; }
   .nav-link { font-size: 16px !important; }
+  /* One column, every video the same size */
   .project-grid, .clearfix { display: block !important; }
-  .work-item.half-left, .work-item.half-right { width: 100% !important; margin-bottom: 12px; }
+  .work-item.full, .work-item.half-left, .work-item.half-right {
+    width: 100% !important; aspect-ratio: 16 / 9 !important; margin-bottom: 12px; }
+  .work-item-client { font-size: 26px; }
 }
 
 @media (max-width: 600px) {
@@ -868,7 +871,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v26 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v27 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
