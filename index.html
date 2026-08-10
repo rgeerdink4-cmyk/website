@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v34 -->
+<!-- versie: 2026-08-06-mobiel-v35 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -292,7 +292,7 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
   .contact-email { font-size: 17px; }
   footer { grid-template-columns: 1fr 1fr !important; gap: 28px !important; padding: 36px 20px 44px !important; }
   .to-top { padding: 40px 0 32px; }
-  .footer-name { font-size: 20px; }
+  .footer-name { font-size: 17px; }
   .footer-copy { grid-column: 1 / -1; }
 }
 
@@ -371,8 +371,8 @@ footer { justify-content: space-between; }
 footer { background: var(--bg); border-top: 1px solid rgba(255,255,255,0.12);
          display: grid; grid-template-columns: 1.2fr 1.4fr 1.4fr 1fr;
          gap: 40px; align-items: start; padding: 48px 48px 56px; }
-.footer-name { font-family: 'Amarante', cursive; font-size: 24px; color: var(--accent);
-               line-height: 1.2; display: block; }
+.footer-name { font-family: 'Amarante', cursive; font-size: 19px; color: var(--accent);
+               line-height: 1.25; display: block; text-transform: uppercase; }
 .footer-col-title { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600;
                     color: var(--ink); margin-bottom: 18px; }
 .footer-col-title em { font-style: normal; color: var(--accent); }
@@ -513,7 +513,7 @@ footer { background: var(--bg); border-top: 1px solid rgba(255,255,255,0.12);
     </button>
   </div>
   <footer>
-    <div><span class="footer-name">Robert Geerdink</span></div>
+    <div><span class="footer-name">Robert<br>Geerdink</span></div>
     <div>
       <p class="footer-col-title">Laat van je horen!</p>
       <a href="mailto:robertgeerdink@outlook.com" class="footer-mail">robertgeerdink@outlook.com</a>
@@ -612,7 +612,7 @@ footer { background: var(--bg); border-top: 1px solid rgba(255,255,255,0.12);
     </button>
   </div>
   <footer>
-    <div><span class="footer-name">Robert Geerdink</span></div>
+    <div><span class="footer-name">Robert<br>Geerdink</span></div>
     <div>
       <p class="footer-col-title">Laat van je horen!</p>
       <a href="mailto:robertgeerdink@outlook.com" class="footer-mail">robertgeerdink@outlook.com</a>
@@ -924,7 +924,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v34 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v35 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
