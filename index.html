@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v27 -->
+<!-- versie: 2026-08-06-mobiel-v28 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -338,6 +338,15 @@ to { transform: rotate(360deg); } }
               opacity: 0; transition: opacity 0.5s ease; }
 #intro-text.in { opacity: 1; }
 body.intro-lock { overflow: hidden; }
+/* The circle drops into place while the logo flies up */
+@keyframes circle-drop {
+  0%   { transform: translateY(-120vh); }
+  55%  { transform: translateY(14px); }
+  72%  { transform: translateY(-8px); }
+  86%  { transform: translateY(4px); }
+  100% { transform: translateY(0); }
+}
+#nav-circle.drop { animation: circle-drop 1.1s cubic-bezier(0.4, 0, 0.3, 1) both; }
 </style>
 </head>
 <body>
@@ -765,6 +774,8 @@ window.addEventListener('DOMContentLoaded', function() {
         const dy = (to.top + to.height / 2) - (from.top + from.height / 2);
         introInner.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
       }
+      const circle = document.getElementById('nav-circle');
+      if (circle) { circle.classList.remove('drop'); void circle.offsetWidth; circle.classList.add('drop'); }
       // Only the backdrop fades; the logo itself stays fully opaque
       intro.classList.add('clear');
       document.body.classList.remove('intro-lock');
@@ -871,7 +882,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v27 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v28 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
