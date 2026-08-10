@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v38 -->
+<!-- versie: 2026-08-06-mobiel-v39 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -294,7 +294,7 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
   .contact-email { font-size: 17px; }
   footer { grid-template-columns: 1fr !important; gap: 24px !important; justify-items: center;
            text-align: center; padding: 36px 20px 44px !important; }
-  .social-btns { justify-content: center; }
+  .social-icons { justify-content: center; }
   .to-top { padding: 40px 0 32px; }
 
   .footer-copy { order: 3; }
@@ -382,11 +382,9 @@ footer { background: var(--bg); border-top: 1px solid rgba(255,255,255,0.12);
 .footer-mail { font-size: 14px; color: rgba(255,255,255,0.5); text-decoration: none;
                letter-spacing: 0.03em; transition: color 0.2s; }
 .footer-mail:hover { color: var(--accent); }
-.social-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
-.social-btn { font-family: 'Amarante', cursive; font-size: 14px; color: var(--accent);
-              border: 1px solid rgba(0,255,135,0.3); padding: 8px 14px; display: inline-block;
-              text-decoration: none; transition: color 0.2s, background 0.2s, border-color 0.2s; }
-.social-btn:hover { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.social-icons { display: flex; gap: 18px; justify-content: flex-end; align-items: center; }
+.social-icon { color: var(--accent); display: flex; transition: transform 0.2s, opacity 0.2s; opacity: 0.85; }
+.social-icon:hover { opacity: 1; transform: translateY(-2px); }
 .footer-copy { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; }
 .footer-copy span { display: block; color: rgba(255,255,255,0.4); margin-top: 6px; }
 </style>
@@ -524,9 +522,13 @@ footer { background: var(--bg); border-top: 1px solid rgba(255,255,255,0.12);
       <p class="footer-col-title">Laat van je horen!</p>
       <a href="mailto:robertgeerdink@outlook.com" class="footer-mail">robertgeerdink@outlook.com</a>
     </div>
-    <div class="social-btns">
-      <a href="#" class="social-btn">Instagram</a>
-      <a href="#" class="social-btn">LinkedIn</a>
+    <div class="social-icons">
+      <a href="#" class="social-icon" title="Instagram" aria-label="Instagram">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="#" class="social-icon" title="LinkedIn" aria-label="LinkedIn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+      </a>
     </div>
   </footer>
 </div>
@@ -619,9 +621,13 @@ footer { background: var(--bg); border-top: 1px solid rgba(255,255,255,0.12);
       <p class="footer-col-title">Laat van je horen!</p>
       <a href="mailto:robertgeerdink@outlook.com" class="footer-mail">robertgeerdink@outlook.com</a>
     </div>
-    <div class="social-btns">
-      <a href="#" class="social-btn">Instagram</a>
-      <a href="#" class="social-btn">LinkedIn</a>
+    <div class="social-icons">
+      <a href="#" class="social-icon" title="Instagram" aria-label="Instagram">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="#" class="social-icon" title="LinkedIn" aria-label="LinkedIn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+      </a>
     </div>
   </footer>
 </div>
@@ -919,7 +925,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v38 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v39 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
