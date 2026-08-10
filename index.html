@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v31 -->
+<!-- versie: 2026-08-06-mobiel-v32 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -61,7 +61,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; a
 .reel-play-btn svg { margin-left: 4px; }
 
 /* ABOUT */
-.about-page { max-width: 1280px; margin: 0 auto; width: 100%; box-sizing: border-box; position: relative; overflow-x: hidden; padding: 160px 48px 80px; display: flex; flex-direction: column; }
+.about-page { max-width: 1280px; margin: 0 auto; width: 100%; box-sizing: border-box; position: relative; overflow-x: hidden; padding: 160px 48px 12px; display: flex; flex-direction: column; }
 .about-heading { font-family: 'Amarante', cursive; font-weight: 400; font-size: clamp(28px, 3.5vw, 48px); text-transform: uppercase; color: var(--accent); line-height: 1; margin-bottom: 6px; }
 .about-top { margin-bottom: 16px; }
 .about-mid { display: grid; grid-template-columns: 1fr 0.55fr; gap: 48px; align-items: start; margin-bottom: 48px; width: 100%; }
@@ -288,8 +288,8 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
     width: 100% !important; aspect-ratio: 16 / 9 !important; margin-bottom: 12px; }
   .work-item-client { font-size: 26px; }
   .contact-block { padding: 40px 20px 28px; gap: 10px; }
-  .contact-heading { font-size: 26px; }
-  .contact-email { font-size: 15px; }
+  .contact-heading { font-size: 21px; }
+  .contact-email { font-size: 17px; }
   footer { padding: 20px !important; flex-direction: column; gap: 14px; }
 }
 
@@ -350,9 +350,9 @@ body.intro-lock { overflow: hidden; }
 /* CONTACT — its own section, sitting just above the footer */
 .contact-block { padding: 56px 48px 40px; text-align: center; display: flex;
                  flex-direction: column; align-items: center; gap: 14px; }
-.contact-heading { font-family: 'Amarante', cursive; font-size: 34px; color: var(--ink);
+.contact-heading { font-family: 'Amarante', cursive; font-size: 27px; color: var(--ink);
                    text-transform: uppercase; line-height: 1; }
-.contact-email { font-size: 20px; color: rgba(255,255,255,0.55); text-decoration: none;
+.contact-email { font-size: 24px; color: rgba(255,255,255,0.6); text-decoration: none;
                  letter-spacing: 0.06em; transition: color 0.2s; }
 .contact-email:hover { color: var(--accent); }
 footer { justify-content: space-between; }
@@ -475,20 +475,8 @@ footer { justify-content: space-between; }
         <p class="work-item-title">Connect App</p>
         <p class="work-item-tags">UI Motion · Animation</p>
       </div>
-    </div></div><div class="work-item full" onclick="openLb('v9')">
-      <video autoplay muted loop playsinline preload="auto">
-        <source src="nieuw-full.m4v" type="video/mp4">
-        <source src="nieuw_full.m4v" type="video/mp4">
-        <source src="nieuw_full.mp4" type="video/mp4">
-      </video>
-      <div class="work-item-info">
-        <span class="work-item-client"></span>
-        <p class="work-item-title"></p>
-        <p class="work-item-tags"></p>
-      </div>
-    </div>
-  
-</main>
+    </div></div>
+  </main>
   <section class="contact-block">
     <span class="contact-heading">LAAT VAN JE HOREN</span>
     <a href="mailto:robertgeerdink@outlook.com" class="contact-email">robertgeerdink@outlook.com</a>
@@ -613,7 +601,6 @@ const fullSrcs = {
   v6: ['philley-full.m4v', 'philley_full.m4v', 'philley_full.mp4'],
   v7: ['apollo-full.m4v', 'apollo_full.m4v', 'apollo_full.mp4'],
   v8: ['safandarley-full.m4v', 'safandarley_full.m4v', 'safandarley_full.mp4'],
-  v9: ['nieuw-full.m4v', 'nieuw_full.m4v', 'nieuw_full.mp4'],
 };
 
 // PAGE SWITCHING
@@ -891,7 +878,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v31 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v32 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
