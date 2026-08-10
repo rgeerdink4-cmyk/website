@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v28 -->
+<!-- versie: 2026-08-06-mobiel-v29 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -188,9 +188,6 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
 .deco-line span:nth-child(4) { width: 6px; animation-delay: 0.45s; }
 .deco-line span:nth-child(5) { width: 20px; animation-delay: 0.6s; }
 
-  to { opacity: 1; transform: scaleX(1); }
-}
-
 /* Corner bracket decorations */
 .deco-bracket {
   position: relative;
@@ -242,9 +239,6 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
 
 
 
-to { transform: rotate(360deg); } }
-50%{ transform: scale(1.2); } }
-50%,90%{ transform: rotate(180deg); } 100%{ transform: rotate(180deg); } }
 
 
 
@@ -882,7 +876,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v28 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v29 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
