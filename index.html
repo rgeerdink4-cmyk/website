@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v18 -->
+<!-- versie: 2026-08-06-mobiel-v19 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -69,6 +69,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; a
 .about-photo-col { order: 2; }
 .about-body { font-size: 15px; line-height: 1.85; max-width: 78ch; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
 .about-photo { width: 100%; aspect-ratio: 1; border-radius: 16px; object-fit: cover; display: block; max-width: 100%; }
+.photo-wrap { display: block; width: 100%; }
 .about-bottom { width: 100%; box-sizing: border-box; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
 .about-section-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 20px; display: block; }
 .expertise-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 24px; margin-bottom: 32px; width: 100%; max-width: 100%; }
@@ -139,15 +140,6 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
 }
 .work-contact-email:hover { color: var(--accent); }
 
-.about-photo {
-  width: 100%;
-  max-width: 320px;
-  aspect-ratio: 1;
-  border-radius: 16px;
-  object-fit: cover;
-  margin-bottom: 32px;
-  display: block;
-}
 
 /* DECORATIVE ELEMENTS */
 .deco-wrap { position: relative; }
@@ -268,8 +260,10 @@ to { transform: rotate(360deg); } }
   .about-text-col { order: 0 !important; }
   .about-photo { max-width: 100%; }
   /* Photo centred, text justified across the full width */
-  .photo-wrap { display: block !important; max-width: 360px; margin: 0 auto 4px !important; }
-  .about-photo-col { text-align: center; }
+  /* Full width so it always reads as centred */
+  .photo-wrap { display: block !important; width: 100% !important; max-width: 100% !important; margin: 0 0 4px !important; }
+  .about-photo { width: 100% !important; max-width: 100% !important; aspect-ratio: 4 / 3; }
+  .about-photo-col { width: 100%; }
   .about-text-col { width: 100%; }
   .about-body { font-size: 16px !important; line-height: 1.8 !important; max-width: 100% !important;
                 text-align: justify; hyphens: auto; }
@@ -793,7 +787,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v18 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v19 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
