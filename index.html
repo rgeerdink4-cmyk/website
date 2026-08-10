@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v37 -->
+<!-- versie: 2026-08-06-mobiel-v38 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -263,6 +263,8 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
   .about-body { font-size: 16px !important; line-height: 1.8 !important; max-width: 100% !important;
                 text-align: justify; hyphens: auto; }
   .about-heading { font-size: clamp(30px, 9vw, 44px) !important; }
+  /* Heading and subtitle centred on narrow screens */
+  .about-top { text-align: center; }
   /* Expertise and Toolbox stacked (inline grid style needs overriding) */
   .about-bottom { display: block !important; }
   .about-bottom > div { margin-bottom: 36px; }
@@ -917,7 +919,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v37 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v38 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
