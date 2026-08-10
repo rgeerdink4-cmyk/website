@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v12 -->
+<!-- versie: 2026-08-06-mobiel-v13 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -61,13 +61,13 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; a
 .reel-play-btn svg { margin-left: 4px; }
 
 /* ABOUT */
-.about-page { max-width: 960px; margin: 0 auto; width: 100%; box-sizing: border-box; position: relative; overflow-x: hidden; padding: 160px 40px 80px; display: flex; flex-direction: column; }
+.about-page { max-width: 1120px; margin: 0 auto; width: 100%; box-sizing: border-box; position: relative; overflow-x: hidden; padding: 160px 48px 80px; display: flex; flex-direction: column; }
 .about-heading { font-family: 'Amarante', cursive; font-weight: 400; font-size: clamp(28px, 3.5vw, 48px); text-transform: uppercase; color: var(--accent); line-height: 1; margin-bottom: 6px; }
 .about-top { margin-bottom: 32px; }
-.about-mid { display: grid; grid-template-columns: 1fr 0.7fr; gap: 40px; align-items: start; margin-bottom: 48px; width: 100%; }
+.about-mid { display: grid; grid-template-columns: 1fr 0.75fr; gap: 52px; align-items: start; margin-bottom: 48px; width: 100%; }
 .about-text-col { order: 1; }
 .about-photo-col { order: 2; }
-.about-body { font-size: 15px; line-height: 1.85; max-width: 62ch; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
+.about-body { font-size: 15px; line-height: 1.85; max-width: 70ch; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
 .about-photo { width: 100%; aspect-ratio: 1; border-radius: 16px; object-fit: cover; display: block; max-width: 100%; }
 .about-bottom { width: 100%; box-sizing: border-box; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
 .about-section-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 20px; display: block; }
@@ -268,7 +268,8 @@ to { transform: rotate(360deg); } }
   .about-text-col { order: 0 !important; }
   .about-photo { max-width: 100%; }
   /* Photo centred, text justified across the full width */
-  .photo-wrap { max-width: 360px; margin: 0 auto 4px; }
+  .photo-wrap { display: block !important; max-width: 360px; margin: 0 auto 4px !important; }
+  .about-photo-col { text-align: center; }
   .about-text-col { width: 100%; }
   .about-body { font-size: 16px !important; line-height: 1.8 !important; max-width: 100% !important;
                 text-align: justify; hyphens: auto; }
@@ -745,7 +746,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v12 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v13 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
