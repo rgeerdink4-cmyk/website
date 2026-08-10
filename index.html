@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v24 -->
+<!-- versie: 2026-08-06-mobiel-v25 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -322,8 +322,10 @@ to { transform: rotate(360deg); } }
 /* INTRO */
 #intro { position: fixed; inset: 0; z-index: 10000; background: var(--bg);
          display: flex; align-items: center; justify-content: center;
-         transition: opacity 0.6s ease; }
+         transition: background 0.7s ease; }
+#intro.clear { background: transparent; }
 #intro.done { opacity: 0; pointer-events: none; }
+.intro-hide { visibility: hidden; }
 #intro-inner { position: relative; width: 420px; max-width: 70vw; transform-origin: center center;
                transition: transform 1s cubic-bezier(0.65,0,0.35,1); }
 #intro-logo { width: 100%; }
@@ -745,6 +747,13 @@ window.addEventListener('DOMContentLoaded', function() {
     lottie.loadAnimation({
       container: introLogo, renderer: 'svg', loop: true, autoplay: true, animationData: animData
     });
+    // Keep the real nav logo hidden so it can't show through the moving one
+    const navText = document.getElementById('lottie-text');
+    const navCircle = document.getElementById('nav-circle');
+    container.classList.add('intro-hide');
+    if (navText) navText.classList.add('intro-hide');
+    if (navCircle) navCircle.classList.add('intro-hide');
+
     setTimeout(() => {
       const from = introInner.getBoundingClientRect();
       const to = container.getBoundingClientRect();
@@ -754,11 +763,18 @@ window.addEventListener('DOMContentLoaded', function() {
         const dy = (to.top + to.height / 2) - (from.top + from.height / 2);
         introInner.style.transform = `translate(${dx}px, ${dy}px) scale(${scale})`;
       }
+      // Only the backdrop fades; the logo itself stays fully opaque
+      intro.classList.add('clear');
+      document.body.classList.remove('intro-lock');
+
+      // At the end of the flight, reveal the nav logo and drop the overlay
+      // in the same frame, so there is no moment where both are visible.
       setTimeout(() => {
-        intro.classList.add('done');
-        document.body.classList.remove('intro-lock');
-        setTimeout(() => intro.remove(), 700);
-      }, 700);
+        container.classList.remove('intro-hide');
+        if (navText) navText.classList.remove('intro-hide');
+        if (navCircle) navCircle.classList.remove('intro-hide');
+        requestAnimationFrame(() => intro.remove());
+      }, 1000);
     }, 2500);
   }
 
@@ -851,7 +867,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v24 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v25 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
