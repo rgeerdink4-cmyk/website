@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v64 -->
+<!-- versie: 2026-08-06-mobiel-v65 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -76,6 +76,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; a
 .expertise-item { font-size: 14px; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--ink); transition: color 0.2s; }
 .expertise-item:hover { color: var(--accent); }
 .tools { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; }
+.tool-break { flex-basis: 100%; height: 0; margin: 0; padding: 0; border: 0; }
 .tool { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.03em; white-space: nowrap; color: var(--accent); border: 1px solid rgba(0,255,135,0.3); padding: 8px 14px; display: inline-block; transition: border-color 0.2s, color 0.2s; }
 .tool:hover { border-color: var(--accent); color: #fff; }
 .tool.outline { color: var(--accent); border: 1px solid rgba(0,255,135,0.3); }
@@ -588,6 +589,7 @@ footer { background: var(--bg); border-top: 1px solid rgba(255,255,255,0.12);
       <span class="tool">Illustrator</span>
       <span class="tool">Premiere</span>
       <span class="tool">Photoshop</span>
+      <span class="tool-break"></span>
       <span class="tool outline">Blender</span>
       <span class="tool outline">Figma</span>
     </div>
@@ -964,7 +966,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v64 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v65 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
