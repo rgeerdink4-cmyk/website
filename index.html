@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v65 -->
+<!-- versie: 2026-08-06-mobiel-v66 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -278,8 +278,10 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
   .about-span { grid-column: auto !important; }
   .expertise-grid { grid-template-columns: 1fr !important; }
   .expertise-item { font-size: 17px !important; padding: 15px 0 !important; }
-  .tools { gap: 10px !important; }
-  .tool { font-size: 15px !important; padding: 12px 16px !important; text-align: center; }
+  .tools { gap: 8px !important; }
+  /* No forced row break on narrow screens; let them flow */
+  .tool-break { display: none !important; }
+  .tool { font-size: 14px !important; padding: 10px 14px !important; text-align: center; }
   .about-section-label { font-size: 11px !important; margin-bottom: 14px !important; }
   .exp-item { grid-template-columns: 1fr !important; gap: 10px !important; padding: 24px 0 !important; }
   .exp-period span { display: inline; margin-left: 8px; }
@@ -966,7 +968,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v65 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v66 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
