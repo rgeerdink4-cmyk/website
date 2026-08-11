@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v68 -->
+<!-- versie: 2026-08-06-mobiel-v70 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -396,9 +396,9 @@ footer { background: var(--bg); border-top: 1px solid rgba(255,255,255,0.12);
 .social-icon:hover { opacity: 1; transform: translateY(-2px); }
 .footer-copy { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; }
 .footer-copy span { display: block; color: rgba(255,255,255,0.4); margin-top: 6px; }
-/* New logo file renders at half size; scale the SVG back up */
+/* eyes.json draws at about half size; enlarge the whole rendering */
 #lottie-logo { overflow: visible !important; }
-#lottie-logo svg, #intro-logo svg { transform: scale(2); transform-origin: center center; }
+#lottie-logo svg, #intro-logo svg { transform: scale(2) !important; transform-origin: center center; }
 </style>
 </head>
 <body>
@@ -971,7 +971,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v68 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v70 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
