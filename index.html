@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v39 -->
+<!-- versie: 2026-08-06-mobiel-v40 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -107,7 +107,12 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
 
 /* LIGHTBOX */
 #lb { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; gap: 20px; }
-#lb video { max-width: 90vw; max-height: 80vh; }
+#lb video { max-width: 90vw; max-height: 70vh; }
+#lb-info { max-width: min(760px, 90vw); text-align: center; }
+#lb-info:empty, #lb-info.hidden { display: none; }
+#lb-client { font-family: 'Amarante', cursive; font-size: 20px; color: var(--accent);
+             text-transform: uppercase; display: block; margin-bottom: 6px; }
+#lb-text { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.7); }
 #lb button { color: #fff; background: none; border: 1px solid rgba(255,255,255,0.3); padding: 10px 28px; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; }
 
 /* BURST */
@@ -635,10 +640,26 @@ footer { background: var(--bg); border-top: 1px solid rgba(255,255,255,0.12);
 <!-- LIGHTBOX -->
 <div id="lb" onclick="if(event.target===this)closeLb()">
   <video id="lb-vid" controls></video>
+  <div id="lb-info">
+    <span id="lb-client"></span>
+    <p id="lb-text"></p>
+  </div>
   <button onclick="closeLb()">✕ Sluiten</button>
 </div>
 
 <script>
+// Context shown under each video in the lightbox. Leave the text empty to hide it.
+const captions = {
+  v1: { client: 'Nike', text: '' },
+  v2: { client: 'GGD Twente', text: '' },
+  v3: { client: 'High Tech Twente', text: '' },
+  v4: { client: 'AskUI', text: '' },
+  v5: { client: 'Lenferink', text: '' },
+  v6: { client: 'Philley', text: '' },
+  v7: { client: 'Apollo Tyres', text: '' },
+  v8: { client: 'SafanDarley', text: '' },
+};
+
 const fullSrcs = {
   v1: ['nike-full.m4v', 'nike_full.m4v', 'nike_full.mp4'],
   v2: ['ggd-full.m4v', 'ggd_full.m4v', 'ggd_full.mp4'],
@@ -683,6 +704,12 @@ function openLb(id) {
     }).catch(() => {});
   };
   lbVid.onerror = () => { i++; if (i < list.length) { lbVid.src = list[i]; start(); } };
+  const cap = captions[id] || {};
+  const info = document.getElementById('lb-info');
+  document.getElementById('lb-client').textContent = cap.client || '';
+  document.getElementById('lb-text').textContent = cap.text || '';
+  info.classList.toggle('hidden', !cap.client && !cap.text);
+
   lbVid.src = list[0];
   lb.style.display = 'flex';
   document.body.style.overflow = 'hidden';
@@ -925,7 +952,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v39 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v40 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
