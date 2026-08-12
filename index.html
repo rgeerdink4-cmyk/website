@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v98 -->
+<!-- versie: 2026-08-06-mobiel-v99 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -305,8 +305,8 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
   /* Footer CSS sits later in the file, so these need !important */
   .footer-copy { position: static !important; transform: none !important;
                  order: 3 !important; right: auto !important; top: auto !important; }
-  .footer-center { order: 1; }
-  .social-icons { justify-content: center; }
+  .footer-center { order: 1; align-items: center !important; }
+  .social-icons { justify-content: center !important; }
   .to-top { padding: 40px 0 32px; }
 
   .footer-copy { order: 3; }
@@ -387,14 +387,13 @@ footer { justify-content: space-between; }
 footer { background: var(--bg); border-top: 1px solid rgba(255,255,255,0.12);
          display: flex; justify-content: space-between; align-items: center;
          gap: 40px; padding: 40px 48px 46px; }
-/* Contact block centred in the footer, copyright pinned right */
-footer { position: relative; justify-content: center !important; }
-.footer-center { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-.footer-copy { position: absolute; right: 48px; top: 50%; transform: translateY(-50%); }
+/* Contact block left, copyright right */
+footer { justify-content: space-between !important; }
+.footer-center { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
 .footer-col-title { font-family: 'Amarante', cursive; font-size: 17px; color: var(--ink);
                     text-transform: uppercase; margin: 0; line-height: 1; letter-spacing: 0.02em; }
 .footer-col-title em { font-style: normal; color: var(--accent); }
-.social-icons { display: flex; gap: 20px; justify-content: center; align-items: center; }
+.social-icons { display: flex; gap: 20px; justify-content: flex-start; align-items: center; }
 .social-icon { color: var(--accent); display: flex; transition: transform 0.2s, opacity 0.2s; opacity: 0.85; }
 .social-icon:hover { opacity: 1; transform: translateY(-2px); }
 .footer-copy { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; }
@@ -1022,7 +1021,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v98 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v99 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
