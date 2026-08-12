@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v78 -->
+<!-- versie: 2026-08-06-mobiel-v79 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -403,6 +403,40 @@ footer { background: var(--bg); border-top: 1px solid rgba(255,255,255,0.12);
 #lottie-logo svg, #intro-logo svg { transform: scale(2) !important; transform-origin: center center; }
 #lottie-logo svg { pointer-events: none; }
 nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
+
+/* ---- PAGINA-OVERGANGEN ----
+   Zet TRANSITION in het script op: 'wipe' | 'slide' | 'zoom' | 'stagger' */
+
+/* 1. WIPE: een groen vlak veegt over het scherm en onthult de nieuwe pagina */
+#wipe { position: fixed; inset: 0; z-index: 8000; pointer-events: none;
+        background: var(--accent); transform: scaleY(0); transform-origin: bottom; }
+#wipe.in  { animation: wipe-in 0.42s cubic-bezier(0.7,0,0.3,1) forwards; }
+#wipe.out { animation: wipe-out 0.42s cubic-bezier(0.7,0,0.3,1) forwards; }
+@keyframes wipe-in  { from { transform: scaleY(0); transform-origin: bottom; }
+                      to   { transform: scaleY(1); transform-origin: bottom; } }
+@keyframes wipe-out { from { transform: scaleY(1); transform-origin: top; }
+                      to   { transform: scaleY(0); transform-origin: top; } }
+
+/* 2. SLIDE: de oude pagina schuift weg, de nieuwe komt van de andere kant */
+.page.leave-left  { animation: slide-out-l 0.34s cubic-bezier(0.5,0,0.75,0) forwards; }
+.page.enter-right { animation: slide-in-r  0.42s cubic-bezier(0.2,0.9,0.3,1) forwards; }
+@keyframes slide-out-l { to { transform: translateX(-6%); opacity: 0; } }
+@keyframes slide-in-r  { from { transform: translateX(6%); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* 3. ZOOM: wegvallen naar achteren, nieuwe pagina komt naar voren */
+.page.leave-zoom { animation: zoom-out 0.3s ease-in forwards; }
+.page.enter-zoom { animation: zoom-in  0.45s cubic-bezier(0.2,0.9,0.3,1) forwards; }
+@keyframes zoom-out { to { transform: scale(1.06); opacity: 0; filter: blur(6px); } }
+@keyframes zoom-in  { from { transform: scale(0.94); opacity: 0; filter: blur(6px); }
+                      to   { transform: none; opacity: 1; filter: none; } }
+
+/* 4. STAGGER: onderdelen komen één voor één omhoog */
+.page.enter-stagger > *, .page.enter-stagger .work-item, .page.enter-stagger .about-top,
+.page.enter-stagger .about-mid, .page.enter-stagger .about-bottom, .page.enter-stagger .about-exp {
+  animation: rise 0.5s cubic-bezier(0.2,0.9,0.3,1) backwards; }
+@keyframes rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+.page.leave-fade { animation: fade-out 0.22s ease forwards; }
+@keyframes fade-out { to { opacity: 0; } }
 </style>
 </head>
 <body>
@@ -416,6 +450,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 </div>
 <div id="nav-circle" style="position:absolute;width:200px;height:200px;border-radius:50%;background:#0a0a0a;z-index:499;pointer-events:none;transition:opacity 0.4s;"></div>
 <div id="intro"><div id="intro-inner"><div id="intro-logo"></div><div id="intro-text"></div></div></div>
+<div id="wipe"></div>
 <div id="cursor"></div>
 
 <nav>
@@ -695,19 +730,77 @@ const fullSrcs = {
 };
 
 // PAGE SWITCHING
+// Kies hier de overgang: 'wipe' | 'slide' | 'zoom' | 'stagger'
+const TRANSITION = 'wipe';
+
+let switching = false;
 function showPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
-  document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
-  event.target.classList.add('active');
-  window.scrollTo(0, 0);
-  // Re-trigger reveals
-  setTimeout(() => {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('up'); io.unobserve(e.target); } });
-    }, {threshold:0.1});
-    document.querySelectorAll('#page-'+name+' .reveal:not(.up)').forEach(el => io.observe(el));
-  }, 50);
+  const target = document.getElementById('page-'+name);
+  const current = document.querySelector('.page.active');
+  const link = (window.event && window.event.target) || null;
+  if (switching || current === target) return;
+  switching = true;
+
+  const markNav = () => {
+    document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+    if (link) link.classList.add('active');
+  };
+
+  const swap = () => {
+    document.querySelectorAll('.page').forEach(p => {
+      p.classList.remove('active','leave-left','enter-right','leave-zoom','enter-zoom','leave-fade','enter-stagger');
+    });
+    target.classList.add('active');
+    window.scrollTo(0, 0);
+    markNav();
+    setTimeout(() => {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('up'); io.unobserve(e.target); } });
+      }, {threshold:0.1});
+      document.querySelectorAll('#page-'+name+' .reveal:not(.up)').forEach(el => io.observe(el));
+    }, 50);
+  };
+
+  if (TRANSITION === 'wipe') {
+    const wipe = document.getElementById('wipe');
+    wipe.classList.remove('out'); void wipe.offsetWidth; wipe.classList.add('in');
+    setTimeout(() => {
+      swap();
+      wipe.classList.remove('in'); void wipe.offsetWidth; wipe.classList.add('out');
+      setTimeout(() => { wipe.classList.remove('out'); switching = false; }, 430);
+    }, 420);
+
+  } else if (TRANSITION === 'slide') {
+    if (current) current.classList.add('leave-left');
+    setTimeout(() => {
+      swap();
+      target.classList.add('enter-right');
+      setTimeout(() => { target.classList.remove('enter-right'); switching = false; }, 430);
+    }, 300);
+
+  } else if (TRANSITION === 'zoom') {
+    if (current) current.classList.add('leave-zoom');
+    setTimeout(() => {
+      swap();
+      target.classList.add('enter-zoom');
+      setTimeout(() => { target.classList.remove('enter-zoom'); switching = false; }, 460);
+    }, 260);
+
+  } else { // stagger
+    if (current) current.classList.add('leave-fade');
+    setTimeout(() => {
+      swap();
+      target.classList.add('enter-stagger');
+      let i = 0;
+      target.querySelectorAll('.work-item, .about-top, .about-mid, .about-bottom, .about-exp')
+            .forEach(el => { el.style.animationDelay = (i++ * 70) + 'ms'; });
+      setTimeout(() => {
+        target.classList.remove('enter-stagger');
+        target.querySelectorAll('[style*="animation-delay"]').forEach(el => el.style.animationDelay = '');
+        switching = false;
+      }, 1100);
+    }, 220);
+  }
 }
 
 // LIGHTBOX
@@ -979,7 +1072,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v78 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v79 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
