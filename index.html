@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v77 -->
+<!-- versie: 2026-08-06-mobiel-v78 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Instrument+Serif:ital@0;1&family=Amaranth:wght@400;700&family=Lexend+Zetta:wght@700;800;900&family=Dela+Gothic+One&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Amaranth:wght@400;700&family=Lexend+Zetta:wght@700;800;900&family=Dela+Gothic+One&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
 :root { --bg: #0a0a0a; --ink: #ffffff; --accent: #00FF87; }
@@ -45,8 +45,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; a
 .work-item-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 32px; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%); opacity: 0; transition: opacity 0.4s; }
 .work-item:hover .work-item-info { opacity: 1; }
 .work-item-client { font-family: 'Chewy', cursive; font-size: 32px; color: var(--accent); text-transform: uppercase; display: block; }
-.work-item-title { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 22px; color: rgba(255,255,255,0.9);
-                   margin-top: 2px; line-height: 1.2; }
+.work-item-title { font-size: 16px; color: rgba(255,255,255,0.85); margin-top: 6px; }
 .work-item-tags { display: none; }
 
 /* REEL */
@@ -62,7 +61,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; a
 
 /* ABOUT */
 .about-page { max-width: 1280px; margin: 0 auto; width: 100%; box-sizing: border-box; position: relative; padding: 160px 48px 12px; display: flex; flex-direction: column; }
-.about-heading { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: clamp(28px, 3.5vw, 48px); text-transform: uppercase; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+.about-heading { font-family: 'Chewy', cursive; font-weight: 400; font-size: clamp(28px, 3.5vw, 48px); text-transform: uppercase; color: var(--accent); line-height: 1; margin-bottom: 6px; }
 .about-top { margin-bottom: 16px; }
 .about-mid { display: grid; grid-template-columns: 1fr 0.55fr; gap: 48px; align-items: start; margin-bottom: 48px; width: 100%; }
 .about-text-col { order: 1; }
@@ -333,7 +332,7 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
 .exp-period { font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.18em;
               text-transform: uppercase; color: var(--accent); line-height: 1.9; }
 .exp-period span { display: block; color: rgba(255,255,255,0.35); }
-.exp-company { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 26px; color: var(--ink);
+.exp-company { font-family: 'Chewy', cursive; font-size: 26px; color: var(--ink);
                text-transform: uppercase; line-height: 1.1; margin-bottom: 6px; }
 .exp-role { font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.18em;
             text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
@@ -980,7 +979,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v77 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v78 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
