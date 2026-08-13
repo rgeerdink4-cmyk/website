@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v101 -->
+<!-- versie: 2026-08-06-mobiel-v102 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -68,7 +68,9 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; a
 .about-body { font-size: 15px; line-height: 1.85; max-width: 78ch; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
 .about-photo { width: 100%; aspect-ratio: 1; border-radius: 16px; object-fit: cover; display: block; }
 .photo-wrap { display: block; width: 100%; max-width: 300px; }
-.about-bottom { width: 100%; box-sizing: border-box; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+/* Same split as .about-mid so Gereedschap lines up with the photo */
+.about-bottom { width: 100%; box-sizing: border-box; display: grid;
+                grid-template-columns: 1fr 0.55fr; gap: 48px; align-items: start; }
 .about-section-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 20px; display: block; }
 .expertise-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 24px; margin-bottom: 32px; width: 100%; max-width: 100%; }
 .expertise-item { font-size: 14px; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--ink); transition: color 0.2s; }
@@ -613,13 +615,13 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
     </div>
     </div>
     <div>
-    <span class="about-section-label reveal">Toolbox</span>
+    <span class="about-section-label reveal">Gereedschap</span>
     <div class="tools reveal">
       <span class="tool">After Effects</span>
       <span class="tool">Illustrator</span>
       <span class="tool">Premiere</span>
-      <span class="tool">Photoshop</span>
       <span class="tool-break"></span>
+      <span class="tool">Photoshop</span>
       <span class="tool outline">Blender</span>
       <span class="tool outline">Figma</span>
     </div>
@@ -1024,7 +1026,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v101 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v102 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
