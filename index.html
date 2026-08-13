@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v110 -->
+<!-- versie: 2026-08-06-mobiel-v111 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -424,8 +424,8 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 .exp-card-text { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.7); }
 .about-tools { width: 100%; margin-bottom: 8px; }
 /* Ogen naast de footerkop */
-.footer-col-title { display: inline-flex; align-items: center; gap: 10px; justify-content: center; }
-.footer-eyes { display: inline-block; width: 46px; height: 34px; flex: none; }
+.footer-col-title .title-row { display: inline-flex; align-items: center; gap: 12px; }
+.footer-eyes { display: inline-block; width: 64px; height: 48px; flex: none; }
 .footer-eyes svg { display: block; }
 </style>
 </head>
@@ -579,7 +579,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
       <span>Alle rechten voorbehouden.</span>
     </div>
     <div class="footer-contact">
-      <p class="footer-col-title"><span class="footer-eyes" aria-hidden="true"></span>Laat van je horen!</p>
+      <p class="footer-col-title"><span class="title-row"><span class="footer-eyes" aria-hidden="true"></span>Laat van je horen!</span></p>
       <a href="mailto:robertgeerdink@outlook.com" class="footer-mail">robertgeerdink@outlook.com</a>
     </div>
     <div class="social-icons">
@@ -684,7 +684,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
       <span>Alle rechten voorbehouden.</span>
     </div>
     <div class="footer-contact">
-      <p class="footer-col-title"><span class="footer-eyes" aria-hidden="true"></span>Laat van je horen!</p>
+      <p class="footer-col-title"><span class="title-row"><span class="footer-eyes" aria-hidden="true"></span>Laat van je horen!</span></p>
       <a href="mailto:robertgeerdink@outlook.com" class="footer-mail">robertgeerdink@outlook.com</a>
     </div>
     <div class="social-icons">
@@ -1052,7 +1052,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v110 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v111 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
