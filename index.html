@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v108 -->
+<!-- versie: 2026-08-06-mobiel-v109 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -109,7 +109,11 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
              text-transform: uppercase; display: block; margin-bottom: 6px; }
 #lb-text { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.7); white-space: pre-line; }
 #lb-info { max-height: 22vh; overflow-y: auto; }
-#lb button { color: #fff; background: none; border: 1px solid rgba(255,255,255,0.3); padding: 10px 28px; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; }
+#lb button { color: #fff; background: none; border: 1px solid rgba(255,255,255,0.3); padding: 10px 28px;
+             font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+             font-family: 'DM Sans', sans-serif; border-radius: 4px;
+             transition: color 0.2s, border-color 0.2s, background 0.2s; }
+#lb button:hover { color: var(--bg); background: var(--accent); border-color: var(--accent); }
 
 /* BURST */
 .click-burst { position: fixed; pointer-events: none; z-index: 9998; }
@@ -1035,7 +1039,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v108 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v109 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
