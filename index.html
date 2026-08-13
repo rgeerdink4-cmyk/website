@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v114 -->
+<!-- versie: 2026-08-06-mobiel-v115 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -918,7 +918,7 @@ window.addEventListener('DOMContentLoaded', function() {
     const a = lottie.loadAnimation({
       container: el, renderer: 'svg', loop: false, autoplay: true, animationData: eyesData
     });
-    a.addEventListener('complete', () => setTimeout(() => a.goToAndPlay(101, true), 1400));
+    a.addEventListener('complete', () => setTimeout(() => a.goToAndPlay(113, true), 1400));
   });
 
   // Intro: hold the logo full screen, then move it onto its nav position
@@ -1057,7 +1057,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v114 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v115 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
