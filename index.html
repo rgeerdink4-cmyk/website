@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v103 -->
+<!-- versie: 2026-08-06-mobiel-v104 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -68,13 +68,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; a
 .about-body { font-size: 15px; line-height: 1.85; max-width: 78ch; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
 .about-photo { width: 100%; aspect-ratio: 1; border-radius: 16px; object-fit: cover; display: block; }
 .photo-wrap { display: block; width: 100%; max-width: 300px; }
-/* Same split as .about-mid so Gereedschap lines up with the photo */
-.about-bottom { width: 100%; box-sizing: border-box; display: grid;
-                grid-template-columns: 1fr 0.55fr; gap: 48px; align-items: start; }
 .about-section-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 20px; display: block; }
-.expertise-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 24px; margin-bottom: 32px; width: 100%; max-width: 100%; }
-.expertise-item { font-size: 14px; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.1); color: var(--ink); transition: color 0.2s; }
-.expertise-item:hover { color: var(--accent); }
 .tools { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; }
 .tool-break { flex-basis: 100%; height: 0; margin: 0; padding: 0; border: 0; }
 .tool { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.03em; white-space: nowrap; color: var(--accent); border: 1px solid rgba(0,255,135,0.3); padding: 8px 14px; display: inline-block; transition: border-color 0.2s, color 0.2s; }
@@ -273,12 +267,10 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
   /* Heading and subtitle centred on narrow screens */
   .about-top { text-align: center; }
   /* Expertise and Toolbox stacked (inline grid style needs overriding) */
-  .about-bottom { display: block !important; }
-  .about-bottom > div { margin-bottom: 36px; }
+  .exp-cards { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .about-expertise { margin-bottom: 34px; }
   .about-span { grid-column: auto !important; }
-  .expertise-grid { grid-template-columns: 1fr !important; }
-  .expertise-item { font-size: 17px !important; padding: 15px 0 !important; }
-  .tools { gap: 8px !important; }
+      .tools { gap: 8px !important; }
   /* No forced row break on narrow screens; let them flow */
   .tool-break { display: none !important; }
   .tool { font-size: 14px !important; padding: 10px 14px !important; text-align: center; }
@@ -416,6 +408,17 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 @keyframes swipe-in-right  { from { transform: translateX(28%);  opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes swipe-out-right { to { transform: translateX(28%);  opacity: 0; } }
 @keyframes swipe-in-left   { from { transform: translateX(-28%); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* EXPERTISE-KAARTEN */
+.about-expertise { width: 100%; margin-bottom: 44px; }
+.exp-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.exp-card { border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 26px 28px;
+            background: rgba(255,255,255,0.02); transition: border-color 0.25s, background 0.25s; }
+.exp-card:hover { border-color: rgba(0,255,135,0.35); background: rgba(0,255,135,0.03); }
+.exp-card-title { font-family: 'Amarante', cursive; font-size: 19px; color: var(--accent);
+                  text-transform: uppercase; line-height: 1.2; margin-bottom: 12px; }
+.exp-card-text { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.7); }
+.about-tools { width: 100%; margin-bottom: 8px; }
 </style>
 </head>
 <body>
@@ -600,30 +603,39 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
       <p class="about-body reveal">Als ik niet aan het animeren ben, stap ik graag op de motor, speel ik drums in een band en ben ik graag met fotografie bezig. Op reis gaat mijn camera altijd mee en maak ik fotoboeken als blijvende herinnering. Samen met mijn vriendin Femke woon ik in Ootmarsum.</p>
     </div>
   </div>
-  <div class="about-bottom">
-    <div>
+  <div class="about-expertise">
     <span class="about-section-label reveal">Expertise</span>
-    <div class="expertise-grid reveal">
-      <span class="expertise-item reveal">2D Animatie</span>
-      <span class="expertise-item reveal">Motion Graphics</span>
-      <span class="expertise-item reveal">VFX</span>
-      <span class="expertise-item reveal">Illustratie</span>
-      <span class="expertise-item reveal">Video Editing</span>
+    <div class="exp-cards">
+      <div class="exp-card reveal">
+        <h3 class="exp-card-title">Animatie en motion design</h3>
+        <p class="exp-card-text">Ruime ervaring met motion graphics, character animation, illustratie, video editing en visueel ontwerp. Ik krijg energie van alles wat beweegt, met een sterk gevoel voor timing, compositie, kleur, typografie en audio.</p>
+      </div>
+      <div class="exp-card reveal">
+        <h3 class="exp-card-title">Software en technieken</h3>
+        <p class="exp-card-text">Dagelijks werkzaam in de Adobe Suite. Ik blijf mezelf ontwikkelen en ben altijd op zoek naar nieuwe plugins en technieken om mijn werk beter en efficiënter te maken.</p>
+      </div>
+      <div class="exp-card reveal">
+        <h3 class="exp-card-title">Klantgericht werken</h3>
+        <p class="exp-card-text">Als mede-eigenaar van onze animatiestudio heb ik veel ervaring opgedaan in klantcontact en het vertalen van complexe vraagstukken naar duidelijke visuele producties. Ik vind het belangrijk om klanten goed mee te nemen in creatieve keuzes en deze helder te onderbouwen.</p>
+      </div>
+      <div class="exp-card reveal">
+        <h3 class="exp-card-title">Samenwerken en verantwoordelijkheid</h3>
+        <p class="exp-card-text">Ik werk graag samen met collega's, maar pak net zo makkelijk zelfstandig een project op. Ik werk gestructureerd, bewaak deadlines en neem verantwoordelijkheid voor de kwaliteit van mijn werk.</p>
+      </div>
     </div>
-    </div>
-    <div>
+  </div>
+  <div class="about-tools">
     <span class="about-section-label reveal">Gereedschap</span>
     <div class="tools reveal">
       <span class="tool">After Effects</span>
       <span class="tool">Illustrator</span>
       <span class="tool">Premiere</span>
-      <span class="tool-break"></span>
       <span class="tool">Photoshop</span>
       <span class="tool outline">Blender</span>
       <span class="tool outline">Figma</span>
     </div>
-    </div>
-  </div>  <div class="about-exp">
+  </div>
+  <div class="about-exp">
     <span class="about-section-label reveal" style="margin-top:40px;">Werkervaring</span>
     <div class="exp-list">
       <div class="exp-item reveal">
@@ -1023,7 +1035,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v103 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v104 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
