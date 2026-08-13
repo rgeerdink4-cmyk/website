@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v111 -->
+<!-- versie: 2026-08-06-mobiel-v112 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -304,6 +304,8 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
                  order: 3 !important; right: auto !important; top: auto !important;
                  text-align: center !important; }
   .social-icons { justify-content: center !important; }
+  .footer-eyes { position: static !important; transform: none !important;
+                 display: block; margin: 0 auto 6px; width: 72px; height: 54px; }
   .to-top { padding: 40px 0 32px; }
 
   .footer-copy { order: 3; }
@@ -423,9 +425,10 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
                   text-transform: uppercase; line-height: 1.2; margin-bottom: 12px; }
 .exp-card-text { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.7); }
 .about-tools { width: 100%; margin-bottom: 8px; }
-/* Ogen naast de footerkop */
-.footer-col-title .title-row { display: inline-flex; align-items: center; gap: 12px; }
-.footer-eyes { display: inline-block; width: 64px; height: 48px; flex: none; }
+/* Ogen zweven links naast het contactblok, buiten de tekstuitlijning */
+.footer-contact { position: relative; }
+.footer-eyes { position: absolute; left: -96px; top: 50%; transform: translateY(-50%);
+               width: 84px; height: 62px; pointer-events: none; }
 .footer-eyes svg { display: block; }
 </style>
 </head>
@@ -579,7 +582,8 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
       <span>Alle rechten voorbehouden.</span>
     </div>
     <div class="footer-contact">
-      <p class="footer-col-title"><span class="title-row"><span class="footer-eyes" aria-hidden="true"></span>Laat van je horen!</span></p>
+      <span class="footer-eyes" aria-hidden="true"></span>
+      <p class="footer-col-title">Laat van je horen!</p>
       <a href="mailto:robertgeerdink@outlook.com" class="footer-mail">robertgeerdink@outlook.com</a>
     </div>
     <div class="social-icons">
@@ -684,7 +688,8 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
       <span>Alle rechten voorbehouden.</span>
     </div>
     <div class="footer-contact">
-      <p class="footer-col-title"><span class="title-row"><span class="footer-eyes" aria-hidden="true"></span>Laat van je horen!</span></p>
+      <span class="footer-eyes" aria-hidden="true"></span>
+      <p class="footer-col-title">Laat van je horen!</p>
       <a href="mailto:robertgeerdink@outlook.com" class="footer-mail">robertgeerdink@outlook.com</a>
     </div>
     <div class="social-icons">
@@ -913,7 +918,7 @@ window.addEventListener('DOMContentLoaded', function() {
     const a = lottie.loadAnimation({
       container: el, renderer: 'svg', loop: false, autoplay: true, animationData: eyesData
     });
-    a.addEventListener('complete', () => setTimeout(() => a.goToAndPlay(89, true), 200));
+    a.addEventListener('complete', () => setTimeout(() => a.goToAndPlay(89, true), 1200));
   });
 
   // Intro: hold the logo full screen, then move it onto its nav position
@@ -1052,7 +1057,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v111 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v112 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
