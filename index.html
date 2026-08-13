@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v115 -->
+<!-- versie: 2026-08-06-mobiel-v116 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -932,7 +932,7 @@ window.addEventListener('DOMContentLoaded', function() {
       container: introLogo, renderer: 'svg', loop: false, autoplay: true, animationData: animData
     });
     introAnim.addEventListener('complete', function() {
-      setTimeout(() => introAnim.goToAndPlay(89, true), 200);
+      setTimeout(() => introAnim.goToAndPlay(113, true), 200);
     });
     // Keep the real nav logo hidden so it can't show through the moving one
     const navText = document.getElementById('lottie-text');
@@ -1003,7 +1003,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
   // Hold for 0.2s at the end before looping back
   anim.addEventListener('complete', function() {
-    setTimeout(() => anim.goToAndPlay(89, true), 200);
+    setTimeout(() => anim.goToAndPlay(113, true), 200);
   });
 });
 
@@ -1057,7 +1057,7 @@ document.querySelectorAll('.work-item video').forEach(v => {
   v.addEventListener('ended', () => { v.currentTime = start; v.play().catch(()=>{}); });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v115 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v116 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
