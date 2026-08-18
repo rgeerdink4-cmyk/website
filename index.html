@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v142 -->
+<!-- versie: 2026-08-06-mobiel-v144 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -466,8 +466,12 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 /* Lightbox op smalle schermen: video kleiner, tekst over de volle breedte
    zodat je niet in een klein kadertje hoeft te scrollen */
 @media (max-width: 1024px) {
-  #lb { justify-content: flex-start; gap: 16px; padding: 18px 0 28px; }
-  #lb video { max-width: 96vw; max-height: 46vh; }
+  /* Automatische marges centreren de inhoud als die past, en laten hem
+     gewoon doorlopen als de tekst langer is dan het scherm. Betrouwbaarder
+     dan 'safe center', dat niet elke browser kent. */
+  #lb { justify-content: flex-start; gap: 16px; padding: 26px 0 34px; }
+  #lb video { margin-top: auto; max-width: 96vw; max-height: 42vh; }
+  #lb button { margin-bottom: auto; }
   #lb-info { max-width: 92vw; }
   #lb-client { font-size: 18px; }
   #lb-text { font-size: 14.5px; line-height: 1.8; }
@@ -1156,7 +1160,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v142 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v144 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
