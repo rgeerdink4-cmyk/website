@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v134 -->
+<!-- versie: 2026-08-06-mobiel-v135 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -391,7 +391,7 @@ footer { background: var(--bg); border-top: 1px solid rgba(255,255,255,0.12);
 .footer-col-title em { font-style: normal; color: var(--accent); }
 .social-icons { display: flex; gap: 20px; justify-content: center; align-items: center; margin-top: 4px; }
 /* Landingsplek voor de reel-knop rechtsonder */
-.footer-reel-slot { justify-self: end; width: 92px; height: 92px;
+.footer-reel-slot { justify-self: end; width: 116px; height: 116px;
                     display: flex; align-items: center; justify-content: center; }
 .social-icon { color: var(--accent); display: flex; transition: transform 0.2s, opacity 0.2s; opacity: 0.85; }
 .social-icon:hover { opacity: 1; transform: translateY(-2px); }
@@ -434,9 +434,9 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 
 
 /* REEL-KNOP: zweeft onderin het midden, verdwijnt bij de footer */
-.reel-btn { position: fixed; left: 50%; bottom: 30px; margin-left: -46px;
-            z-index: 600; width: 92px; height: 92px; border-radius: 50%;
-            font-family: 'Amarante', cursive; font-size: 19px; letter-spacing: 0.06em;
+.reel-btn { position: fixed; left: 50%; bottom: 30px; margin-left: -58px;
+            z-index: 600; width: 116px; height: 116px; border-radius: 50%;
+            font-family: 'Amarante', cursive; font-size: 18px; letter-spacing: 0.04em;
             text-transform: uppercase; color: var(--bg);
             background: var(--accent); border: 1.5px solid var(--accent);
             box-shadow: 0 10px 30px rgba(0,255,135,0.25);
@@ -448,7 +448,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 .reel-btn.docked { position: static; margin-left: 0; box-shadow: none; }
 
 @media (max-width: 1024px) {
-  .reel-btn { width: 76px; height: 76px; font-size: 16px; bottom: 22px; margin-left: -38px; }
+  .reel-btn { width: 96px; height: 96px; font-size: 15px; bottom: 22px; margin-left: -48px; }
 }
 
 </style>
@@ -468,7 +468,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
     </div>
 <div id="nav-circle" style="position:absolute;width:200px;height:200px;border-radius:50%;background:#0a0a0a;z-index:499;pointer-events:none;transition:opacity 0.4s;"></div>
 <div id="intro"><div id="intro-inner"><div id="intro-logo"></div><div id="intro-text"></div></div></div>
-<button class="reel-btn" onclick="openLb('reel')" aria-label="Bekijk mijn showreel">Reel</button>
+<button class="reel-btn" onclick="openLb('reel')" aria-label="Bekijk mijn showreel">Showreel</button>
 <div id="cursor"></div>
 
 <nav>
@@ -744,7 +744,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 <script>
 // Context shown under each video in the lightbox. Leave the text empty to hide it.
 const captions = {
-  reel: { client: 'Showreel', text: '' },
+  reel: { client: '', text: '' },
   v1: { client: 'Nike — Portals', text: 'Highlights van een negen maanden durend animatieproject voor Nike, bestaande uit meer dan 30 animaties. Samen met een team van illustratoren, animatoren en een composer werkte ik aan het vertalen van educatieve content naar toegankelijke en visueel aantrekkelijke verhalen.\nBinnen het project kwamen motion design, storytelling en de wereldwijde merkidentiteit van Nike samen, met als resultaat een consistente reeks animaties die zowel informatief als inspirerend zijn.' },
   v2: { client: 'GGD Twente — Zo nuchter zijn we niet', text: 'Voor een campagne van GGD Twente maakten we een animatie die aandacht vraagt voor het hoge alcoholgebruik in Twente. Het doel was om bewustwording te creëren en het gesprek hierover op gang te brengen. Met een opvallende cardboard-stijl en een krachtige vertelstijl (met een komisch randje) hebben we een toegankelijke en impactvolle animatie neergezet.' },
   v3: { client: 'High Tech Twente — Ontdek High Tech Twente', text: 'In opdracht voor Artica hebben we voor High Tech Twente een promo animatie gemaakt ter ondersteuning voor haar nieuwe branding. Met kleurrijke illustraties in de stijl van Kurzgesagt hebben we deze toffe animatie neergezet.' },
@@ -1137,7 +1137,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v134 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v135 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
