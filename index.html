@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v146 -->
+<!-- versie: 2026-08-06-mobiel-v147 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -430,24 +430,34 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 .about-tools { width: 100%; margin-bottom: 8px; }
 .footer-contact { position: relative; display: flex; flex-direction: column;
                   align-items: center; gap: 2px; }
-/* SHOWREEL-KNOP — zweeft onderin en dokt in de footer.
-   Alles staat hier bij elkaar; verspreide regels overschreven elkaar eerder. */
-.reel-btn { position: fixed; left: 50%; bottom: 30px; margin-left: -58px; z-index: 600;
-            width: 116px; height: 116px; flex: none; border-radius: 50%; overflow: hidden;
+/* SHOWREEL-KNOP — twee exemplaren die elkaar afwisselen door te schalen.
+   Verplaatsen tijdens het scrollen liep mis bij snelle bewegingen. */
+.reel-btn { width: 116px; height: 116px; flex: none; border-radius: 50%; overflow: hidden;
             font-family: 'Amarante', cursive; font-size: 18px; letter-spacing: 0.04em;
             text-transform: uppercase; color: var(--bg);
             background: var(--accent); border: 1.5px solid var(--accent);
-            box-shadow: 0 10px 30px rgba(0,255,135,0.25);
             display: flex; align-items: center; justify-content: center;
-            will-change: transform;
             transition: background 0.25s, color 0.25s, border-color 0.25s; }
 .reel-btn:hover { background: var(--bg); color: var(--accent); border-color: var(--accent); }
 
-/* Gedokt in de footer: zelfde maat en zelfde tekstgrootte, alleen niet zwevend */
-.reel-btn.docked { position: relative; margin-left: 0; bottom: auto; left: auto;
-                   box-shadow: none; }
+/* Zwevend exemplaar */
+.reel-btn.floating { position: fixed; left: 50%; bottom: 30px; margin-left: -58px; z-index: 600;
+                     box-shadow: 0 10px 30px rgba(0,255,135,0.25);
+                     transform: scale(1); opacity: 1;
+                     transition: transform 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease,
+                                 background 0.25s, color 0.25s, border-color 0.25s; }
+.reel-btn.floating.collapsed { transform: scale(0); opacity: 0; pointer-events: none; }
 
-/* Tekst wisselt bij hover met de ogen */
+/* Exemplaar in de footer */
+.footer-reel-slot { grid-column: 1 / -1; justify-self: center; margin-bottom: 6px;
+                    width: 116px; height: 116px;
+                    display: flex; align-items: center; justify-content: center; }
+.reel-btn.docked { position: relative; transform: scale(0); opacity: 0;
+                   transition: transform 0.5s cubic-bezier(0.2,0.9,0.3,1), opacity 0.3s ease,
+                               background 0.25s, color 0.25s, border-color 0.25s; }
+.reel-btn.docked.grown { transform: scale(1); opacity: 1; }
+
+/* Het label klapt mee dicht via een masker, zodat de tekst niet uitrekt */
 .reel-label { position: relative; z-index: 2; display: block; line-height: 1;
               font-size: inherit; color: inherit; white-space: nowrap;
               transition: opacity 0.25s ease, transform 0.3s ease; }
@@ -460,7 +470,9 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 .reel-btn:hover .reel-eyes { opacity: 1; transform: scale(1); }
 
 @media (max-width: 1024px) {
-  .reel-btn { width: 96px; height: 96px; font-size: 15px; bottom: 22px; margin-left: -48px; }
+  .reel-btn { width: 96px; height: 96px; font-size: 15px; }
+  .reel-btn.floating { bottom: 22px; margin-left: -48px; }
+  .footer-reel-slot { width: 96px; height: 96px; }
 }
 
 
@@ -494,7 +506,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
     </div>
 <div id="nav-circle" style="position:absolute;width:200px;height:200px;border-radius:50%;background:#0a0a0a;z-index:499;pointer-events:none;transition:opacity 0.4s;"></div>
 <div id="intro"><div id="intro-inner"><div id="intro-logo"></div><div id="intro-text"></div></div></div>
-<button class="reel-btn" onclick="openLb('reel')" aria-label="Bekijk mijn showreel"><span class="reel-label">Showreel</span><span class="reel-eyes" aria-hidden="true"></span></button>
+<button class="reel-btn floating" onclick="openLb('reel')" aria-label="Bekijk mijn showreel"><span class="reel-label">Showreel</span><span class="reel-eyes" aria-hidden="true"></span></button>
 <div id="cursor"></div>
 
 <nav>
@@ -625,7 +637,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
     </button>
   </div>
   <footer>
-    <div class="footer-reel-slot"></div>
+    <div class="footer-reel-slot"><button class="reel-btn docked" onclick="openLb('reel')" aria-label="Bekijk mijn showreel"><span class="reel-label">Showreel</span><span class="reel-eyes" aria-hidden="true"></span></button></div>
     <div class="footer-copy">
       &copy; 2026 Robert Geerdink
       <span>Alle rechten voorbehouden.</span>
@@ -733,7 +745,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
     </button>
   </div>
   <footer>
-    <div class="footer-reel-slot"></div>
+    <div class="footer-reel-slot"><button class="reel-btn docked" onclick="openLb('reel')" aria-label="Bekijk mijn showreel"><span class="reel-label">Showreel</span><span class="reel-eyes" aria-hidden="true"></span></button></div>
     <div class="footer-copy">
       &copy; 2026 Robert Geerdink
       <span>Alle rechten voorbehouden.</span>
@@ -1161,7 +1173,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v146 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v147 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
@@ -1192,55 +1204,30 @@ console.log('%c index.html versie 2026-08-06-mobiel-v146 ', 'background:#00FF87;
 
 
 
-// Reel-knop zweeft onderin en dokt rechtsonder in de footer.
-// De verplaatsing wordt uitgeanimeerd: eerst meten waar hij stond, dan verplaatsen,
-// terugzetten op de oude plek en naar de nieuwe laten glijden (FLIP).
+// De zwevende knop krimpt weg zodra de footer nadert; het exemplaar in de
+// footer groeit tegelijk open. Er wordt niets verplaatst, dus snel scrollen
+// kan de knop niet meer op de verkeerde plek achterlaten.
 (function () {
-  const btn = document.querySelector('.reel-btn');
-  if (!btn) return;
-  let docked = false, busy = false;
+  const floating = document.querySelector('.reel-btn.floating');
+  if (!floating) return;
 
-  const move = (toSlot, slot) => {
-    const from = btn.getBoundingClientRect();
-    busy = true;
-
-    if (toSlot) { slot.appendChild(btn); btn.classList.add('docked'); }
-    else { document.body.appendChild(btn); btn.classList.remove('docked'); }
-
-    const to = btn.getBoundingClientRect();
-    const dx = from.left - to.left;
-    const dy = from.top - to.top;
-
-    btn.style.transition = 'none';
-    btn.style.transform = `translate(${dx}px, ${dy}px)`;
-    // Forceer een herberekening zodat de startpositie echt geldt
-    void btn.offsetWidth;
-    btn.style.transition = 'transform 0.55s cubic-bezier(0.2, 0.9, 0.3, 1)';
-    btn.style.transform = 'translate(0, 0)';
-
-    setTimeout(() => {
-      btn.style.transition = '';
-      btn.style.transform = '';
-      busy = false;
-    }, 580);
-  };
-
-  const check = () => {
-    if (busy) return;
+  const update = () => {
     const page = document.querySelector('.page.active') || document;
     const slot = page.querySelector('.footer-reel-slot');
+    const docked = slot ? slot.querySelector('.reel-btn.docked') : null;
     if (!slot) return;
     const r = slot.getBoundingClientRect();
-    const inView = r.top < window.innerHeight - 20 && r.bottom > 0;
+    const visible = r.top < window.innerHeight - 30 && r.bottom > 0;
 
-    if (inView && !docked) { docked = true; move(true, slot); }
-    else if (!inView && docked) { docked = false; move(false, slot); }
+    floating.classList.toggle('collapsed', visible);
+    document.querySelectorAll('.reel-btn.docked').forEach(b => b.classList.remove('grown'));
+    if (docked && visible) docked.classList.add('grown');
   };
 
-  window.addEventListener('scroll', check, { passive: true });
-  window.addEventListener('resize', check);
-  document.addEventListener('click', () => setTimeout(check, 500));
-  check();
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  document.addEventListener('click', () => setTimeout(update, 600));
+  update();
 })();
 
 </script>
