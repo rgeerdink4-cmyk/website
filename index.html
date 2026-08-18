@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v126 -->
+<!-- versie: 2026-08-06-mobiel-v127 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -433,20 +433,20 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 
 
 /* REEL-KNOP: zweeft onderin het midden, verdwijnt bij de footer */
-.reel-btn { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%);
-            z-index: 600; width: 62px; height: 62px; border-radius: 50%;
-            font-family: 'Amarante', cursive; font-size: 14px; letter-spacing: 0.06em;
-            text-transform: uppercase; color: var(--accent);
-            background: rgba(10,10,10,0.7); backdrop-filter: blur(6px);
-            border: 1.5px solid rgba(0,255,135,0.45);
+.reel-btn { position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%);
+            z-index: 600; width: 92px; height: 92px; border-radius: 50%;
+            font-family: 'Amarante', cursive; font-size: 19px; letter-spacing: 0.06em;
+            text-transform: uppercase; color: var(--bg);
+            background: var(--accent); border: 1.5px solid var(--accent);
+            box-shadow: 0 10px 30px rgba(0,255,135,0.25);
             display: flex; align-items: center; justify-content: center;
             transition: background 0.25s, color 0.25s, border-color 0.25s,
                         transform 0.25s, opacity 0.35s; }
-.reel-btn:hover { background: var(--accent); color: var(--bg); border-color: var(--accent);
+.reel-btn:hover { background: transparent; color: var(--accent); border-color: var(--accent);
                   transform: translateX(-50%) scale(1.08); }
 .reel-btn.faded { opacity: 0; pointer-events: none; }
 @media (max-width: 1024px) {
-  .reel-btn { width: 54px; height: 54px; font-size: 12px; bottom: 20px; }
+  .reel-btn { width: 76px; height: 76px; font-size: 16px; bottom: 22px; }
 }
 
 </style>
@@ -1113,7 +1113,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v126 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v127 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
