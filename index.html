@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v125 -->
+<!-- versie: 2026-08-06-mobiel-v126 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -432,18 +432,21 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 .footer-eyes svg { display: block; }
 
 
-/* REEL-KNOP rechtsboven in de header */
-.reel-btn { position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
-            width: 74px; height: 74px; border-radius: 50%;
-            font-family: 'Amarante', cursive; font-size: 16px; letter-spacing: 0.06em;
+/* REEL-KNOP: zweeft onderin het midden, verdwijnt bij de footer */
+.reel-btn { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%);
+            z-index: 600; width: 62px; height: 62px; border-radius: 50%;
+            font-family: 'Amarante', cursive; font-size: 14px; letter-spacing: 0.06em;
             text-transform: uppercase; color: var(--accent);
-            background: transparent; border: 1.5px solid rgba(0,255,135,0.45);
+            background: rgba(10,10,10,0.7); backdrop-filter: blur(6px);
+            border: 1.5px solid rgba(0,255,135,0.45);
             display: flex; align-items: center; justify-content: center;
-            transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.25s; }
+            transition: background 0.25s, color 0.25s, border-color 0.25s,
+                        transform 0.25s, opacity 0.35s; }
 .reel-btn:hover { background: var(--accent); color: var(--bg); border-color: var(--accent);
-                  transform: translateY(-50%) scale(1.07); }
+                  transform: translateX(-50%) scale(1.08); }
+.reel-btn.faded { opacity: 0; pointer-events: none; }
 @media (max-width: 1024px) {
-  .reel-btn { right: 14px; width: 58px; height: 58px; font-size: 13px; }
+  .reel-btn { width: 54px; height: 54px; font-size: 12px; bottom: 20px; }
 }
 
 </style>
@@ -463,10 +466,10 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
     </div>
 <div id="nav-circle" style="position:absolute;width:200px;height:200px;border-radius:50%;background:#0a0a0a;z-index:499;pointer-events:none;transition:opacity 0.4s;"></div>
 <div id="intro"><div id="intro-inner"><div id="intro-logo"></div><div id="intro-text"></div></div></div>
+<button class="reel-btn" onclick="openLb('reel')" aria-label="Bekijk mijn showreel">Reel</button>
 <div id="cursor"></div>
 
 <nav>
-  <button class="reel-btn" onclick="openLb('reel')" aria-label="Bekijk mijn showreel">Reel</button>
   <div class="nav-left">
     <a href="#" class="nav-link active" onclick="showPage('work', this)">Werk</a>
   </div>
@@ -1110,7 +1113,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v125 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v126 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
@@ -1139,6 +1142,22 @@ console.log('%c index.html versie 2026-08-06-mobiel-v125 ', 'background:#00FF87;
 
 
 
+
+
+// Reel-knop vervaagt zodra de footer in beeld komt
+(function () {
+  const btn = document.querySelector('.reel-btn');
+  if (!btn) return;
+  const check = () => {
+    const foot = document.querySelector('.page.active footer, footer');
+    if (!foot) return;
+    const near = foot.getBoundingClientRect().top < window.innerHeight - 40;
+    btn.classList.toggle('faded', near);
+  };
+  window.addEventListener('scroll', check, { passive: true });
+  window.addEventListener('resize', check);
+  check();
+})();
 
 </script>
 </body>
