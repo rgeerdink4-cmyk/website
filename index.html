@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v127 -->
+<!-- versie: 2026-08-06-mobiel-v128 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -442,7 +442,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
             display: flex; align-items: center; justify-content: center;
             transition: background 0.25s, color 0.25s, border-color 0.25s,
                         transform 0.25s, opacity 0.35s; }
-.reel-btn:hover { background: transparent; color: var(--accent); border-color: var(--accent);
+.reel-btn:hover { background: var(--bg); color: var(--accent); border-color: var(--accent);
                   transform: translateX(-50%) scale(1.08); }
 .reel-btn.faded { opacity: 0; pointer-events: none; }
 @media (max-width: 1024px) {
@@ -1113,7 +1113,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v127 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v128 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
