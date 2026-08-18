@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v138 -->
+<!-- versie: 2026-08-06-mobiel-v139 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -101,14 +101,16 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
 .footer-socials a:hover { color: var(--accent); }
 
 /* LIGHTBOX */
-#lb { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; gap: 20px; }
+#lb { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 9999;
+      align-items: center; justify-content: center; flex-direction: column; gap: 20px;
+      overflow-y: auto; padding: 24px 0; }
 #lb video { max-width: 90vw; max-height: 70vh; }
-#lb-info { max-width: min(760px, 90vw); text-align: center; }
 #lb-info:empty, #lb-info.hidden { display: none; }
 #lb-client { font-family: 'Amarante', cursive; font-size: 20px; color: var(--accent);
              text-transform: uppercase; display: block; margin-bottom: 6px; }
-#lb-text { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.7); white-space: pre-line; }
-#lb-info { max-height: 22vh; overflow-y: auto; }
+#lb-text { font-size: 14px; line-height: 1.75; color: rgba(255,255,255,0.72);
+           white-space: pre-line; text-align: justify; text-justify: inter-word; hyphens: auto; }
+#lb-info { max-width: min(860px, 92vw); text-align: center; }
 #lb button { color: #fff; background: none; border: 1px solid rgba(255,255,255,0.3); padding: 10px 28px;
              font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
              font-family: 'DM Sans', sans-serif; border-radius: 4px;
@@ -460,6 +462,16 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
   .reel-btn { width: 96px; height: 96px; font-size: 15px; bottom: 22px; margin-left: -48px; }
 }
 
+
+/* Lightbox op smalle schermen: video kleiner, tekst over de volle breedte
+   zodat je niet in een klein kadertje hoeft te scrollen */
+@media (max-width: 1024px) {
+  #lb { justify-content: flex-start; gap: 16px; padding: 18px 0 28px; }
+  #lb video { max-width: 96vw; max-height: 46vh; }
+  #lb-info { max-width: 92vw; }
+  #lb-client { font-size: 18px; }
+  #lb-text { font-size: 14.5px; line-height: 1.8; }
+}
 </style>
 </head>
 <body>
@@ -1144,7 +1156,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v138 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v139 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
