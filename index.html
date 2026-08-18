@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v129 -->
+<!-- versie: 2026-08-06-mobiel-v130 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -433,7 +433,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 
 
 /* REEL-KNOP: zweeft onderin het midden, verdwijnt bij de footer */
-.reel-btn { position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%);
+.reel-btn { position: fixed; left: 50%; bottom: 30px; margin-left: -46px;
             z-index: 600; width: 92px; height: 92px; border-radius: 50%;
             font-family: 'Amarante', cursive; font-size: 19px; letter-spacing: 0.06em;
             text-transform: uppercase; color: var(--bg);
@@ -442,12 +442,12 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
             display: flex; align-items: center; justify-content: center;
             transition: background 0.25s, color 0.25s, border-color 0.25s,
                         transform 0.25s, opacity 0.35s; }
-.reel-btn:hover { background: var(--bg); color: var(--accent); border-color: var(--accent);
-                  transform: translateX(-50%) scale(1.08); }
-.reel-btn.docked { position: static; transform: none; box-shadow: none; }
-.reel-btn.docked:hover { transform: scale(1.08); }
+.reel-btn:hover { background: var(--bg); color: var(--accent); border-color: var(--accent); }
+.reel-btn { will-change: transform; }
+.reel-btn.docked { position: static; margin-left: 0; box-shadow: none; }
+
 @media (max-width: 1024px) {
-  .reel-btn { width: 76px; height: 76px; font-size: 16px; bottom: 22px; }
+  .reel-btn { width: 76px; height: 76px; font-size: 16px; bottom: 22px; margin-left: -38px; }
 }
 
 </style>
@@ -1120,7 +1120,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v129 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v130 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
@@ -1151,28 +1151,49 @@ console.log('%c index.html versie 2026-08-06-mobiel-v129 ', 'background:#00FF87;
 
 
 
-// Reel-knop zweeft onderin en dokt rechtsonder in de footer zodra die in beeld komt
+// Reel-knop zweeft onderin en dokt rechtsonder in de footer.
+// De verplaatsing wordt uitgeanimeerd: eerst meten waar hij stond, dan verplaatsen,
+// terugzetten op de oude plek en naar de nieuwe laten glijden (FLIP).
 (function () {
   const btn = document.querySelector('.reel-btn');
   if (!btn) return;
-  let docked = false;
+  let docked = false, busy = false;
+
+  const move = (toSlot, slot) => {
+    const from = btn.getBoundingClientRect();
+    busy = true;
+
+    if (toSlot) { slot.appendChild(btn); btn.classList.add('docked'); }
+    else { document.body.appendChild(btn); btn.classList.remove('docked'); }
+
+    const to = btn.getBoundingClientRect();
+    const dx = from.left - to.left;
+    const dy = from.top - to.top;
+
+    btn.style.transition = 'none';
+    btn.style.transform = `translate(${dx}px, ${dy}px)`;
+    // Forceer een herberekening zodat de startpositie echt geldt
+    void btn.offsetWidth;
+    btn.style.transition = 'transform 0.55s cubic-bezier(0.2, 0.9, 0.3, 1)';
+    btn.style.transform = 'translate(0, 0)';
+
+    setTimeout(() => {
+      btn.style.transition = '';
+      btn.style.transform = '';
+      busy = false;
+    }, 580);
+  };
 
   const check = () => {
+    if (busy) return;
     const page = document.querySelector('.page.active') || document;
     const slot = page.querySelector('.footer-reel-slot');
     if (!slot) return;
     const r = slot.getBoundingClientRect();
     const inView = r.top < window.innerHeight - 20 && r.bottom > 0;
 
-    if (inView && !docked) {
-      docked = true;
-      slot.appendChild(btn);
-      btn.classList.add('docked');
-    } else if (!inView && docked) {
-      docked = false;
-      document.body.appendChild(btn);
-      btn.classList.remove('docked');
-    }
+    if (inView && !docked) { docked = true; move(true, slot); }
+    else if (!inView && docked) { docked = false; move(false, slot); }
   };
 
   window.addEventListener('scroll', check, { passive: true });
