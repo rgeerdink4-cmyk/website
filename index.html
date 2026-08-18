@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v136 -->
+<!-- versie: 2026-08-06-mobiel-v137 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -428,9 +428,12 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 .footer-contact { position: relative; display: flex; flex-direction: column;
                   align-items: center; gap: 2px; }
 /* Ogen zitten in de showreel-knop en verschijnen bij hover */
-.reel-btn { position: relative; overflow: hidden; }
+.reel-btn { overflow: hidden; }
+.reel-btn.docked { position: relative; }
+.reel-label { position: relative; z-index: 2; display: block; line-height: 1;
+              color: inherit; white-space: nowrap; }
 .reel-label, .reel-eyes { transition: opacity 0.25s ease, transform 0.3s ease; }
-.reel-eyes { position: absolute; inset: 0; display: flex; align-items: center;
+.reel-eyes { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center;
              justify-content: center; opacity: 0; transform: scale(0.8);
              pointer-events: none; }
 .reel-eyes svg { width: 74%; height: auto; display: block; }
@@ -1140,7 +1143,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v136 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v137 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
