@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v162 -->
+<!-- versie: 2026-08-06-mobiel-v163 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -461,15 +461,15 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 .reel-label { position: relative; z-index: 2; display: block; line-height: 1;
               font-size: inherit; color: inherit; white-space: nowrap;
               transition: opacity 0.25s ease, transform 0.3s ease; }
-/* Tekst in het midden; bij hover een grote driehoek */
+/* Tekst in het midden; bij hover draait de driehoek open */
 .reel-play { position: absolute; inset: 0; z-index: 1; display: flex;
              align-items: center; justify-content: center; opacity: 0;
-             transform: scale(0.7); pointer-events: none;
-             transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.2,0.9,0.3,1); }
+             transform: rotate(-120deg) scale(0.5); pointer-events: none;
+             transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.2,0.9,0.3,1); }
 /* Iets naar rechts: het optische midden van een driehoek ligt links van het echte */
-.reel-play svg { width: 52%; height: auto; display: block; margin-left: 6%; }
+.reel-play svg { width: 48%; height: auto; display: block; margin-left: 5%; }
 .reel-btn:hover .reel-label { opacity: 0; transform: scale(0.9); }
-.reel-btn:hover .reel-play { opacity: 1; transform: scale(1); }
+.reel-btn:hover .reel-play { opacity: 1; transform: rotate(0deg) scale(1); }
 
 @media (max-width: 1024px) {
   .reel-btn { width: 96px; height: 96px; font-size: 15px; }
@@ -1202,7 +1202,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v162 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v163 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
