@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v160 -->
+<!-- versie: 2026-08-06-mobiel-v161 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -431,7 +431,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 /* SHOWREEL-KNOP — twee exemplaren die elkaar afwisselen door te schalen.
    Verplaatsen tijdens het scrollen liep mis bij snelle bewegingen. */
 .reel-btn { width: 116px; height: 116px; flex: none; border-radius: 50%; overflow: hidden;
-            font-family: 'Amarante', cursive; font-size: 18px; letter-spacing: 0.04em;
+            font-family: 'Amarante', cursive; font-size: 16px; letter-spacing: 0.04em;
             text-transform: uppercase; color: var(--bg);
             background: var(--accent); border: 1.5px solid var(--accent);
             display: flex; align-items: center; justify-content: center;
@@ -461,16 +461,23 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 .reel-label { position: relative; z-index: 2; display: block; line-height: 1;
               font-size: inherit; color: inherit; white-space: nowrap;
               transition: opacity 0.25s ease, transform 0.3s ease; }
-.reel-eyes { position: absolute; inset: 0; z-index: 1; display: flex;
-             align-items: center; justify-content: center; opacity: 0;
-             transform: scale(0.8); pointer-events: none;
-             transition: opacity 0.25s ease, transform 0.3s ease; }
+/* Tekst met de oogjes eronder; bij hover wisselt dat naar een play-icoon */
+.reel-stack { position: relative; z-index: 2; display: flex; flex-direction: column;
+              align-items: center; gap: 1px;
+              transition: opacity 0.25s ease, transform 0.3s ease; }
+.reel-eyes { width: 42px; height: 34px; pointer-events: none; }
 .reel-eyes svg { width: 100%; height: 100%; display: block; }
-.reel-btn:hover .reel-label { opacity: 0; transform: scale(0.9); }
-.reel-btn:hover .reel-eyes { opacity: 1; transform: scale(1); }
+.reel-play { position: absolute; inset: 0; z-index: 1; display: flex;
+             align-items: center; justify-content: center; opacity: 0;
+             transform: scale(0.7); pointer-events: none;
+             transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.2,0.9,0.3,1); }
+.reel-play svg { width: 46%; height: auto; display: block; }
+.reel-btn:hover .reel-stack { opacity: 0; transform: scale(0.9); }
+.reel-btn:hover .reel-play { opacity: 1; transform: scale(1); }
 
 @media (max-width: 1024px) {
-  .reel-btn { width: 96px; height: 96px; font-size: 15px; }
+  .reel-btn { width: 96px; height: 96px; font-size: 13px; }
+  .reel-eyes { width: 34px; height: 27px; }
   .reel-btn.floating { bottom: 22px; margin-left: -48px; }
   /* Eigen rij bovenaan, boven het contactblok */
   .footer-reel-slot { grid-column: 1 / -1; justify-self: center !important; order: 1 !important;
@@ -531,7 +538,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
     </div>
 <div id="nav-circle" style="position:absolute;width:200px;height:200px;border-radius:50%;background:#0a0a0a;z-index:499;pointer-events:none;transition:opacity 0.4s;"></div>
 <div id="intro"><div id="intro-inner"><div id="intro-logo"></div><div id="intro-text"></div></div></div>
-<button class="reel-btn floating" onclick="openLb('reel')" aria-label="Bekijk mijn showreel"><span class="reel-label">Showreel</span><span class="reel-eyes" aria-hidden="true"></span></button>
+<button class="reel-btn floating" onclick="openLb('reel')" aria-label="Bekijk mijn showreel"><span class="reel-stack"><span class="reel-label">Showreel</span><span class="reel-eyes" aria-hidden="true"></span></span><span class="reel-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M10 8.4 16 12l-6 3.6z" stroke-linejoin="round"/></svg></span></button>
 <div id="cursor"></div>
 
 <nav>
@@ -680,7 +687,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
       </a>
       </div>
     </div>
-    <div class="footer-reel-slot"><button class="reel-btn docked" onclick="openLb('reel')" aria-label="Bekijk mijn showreel"><span class="reel-label">Showreel</span><span class="reel-eyes" aria-hidden="true"></span></button></div>
+    <div class="footer-reel-slot"><button class="reel-btn docked" onclick="openLb('reel')" aria-label="Bekijk mijn showreel"><span class="reel-stack"><span class="reel-label">Showreel</span><span class="reel-eyes" aria-hidden="true"></span></span><span class="reel-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M10 8.4 16 12l-6 3.6z" stroke-linejoin="round"/></svg></span></button></div>
   </footer>
 </div>
 
@@ -797,7 +804,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
       </a>
       </div>
     </div>
-    <div class="footer-reel-slot"><button class="reel-btn docked" onclick="openLb('reel')" aria-label="Bekijk mijn showreel"><span class="reel-label">Showreel</span><span class="reel-eyes" aria-hidden="true"></span></button></div>
+    <div class="footer-reel-slot"><button class="reel-btn docked" onclick="openLb('reel')" aria-label="Bekijk mijn showreel"><span class="reel-stack"><span class="reel-label">Showreel</span><span class="reel-eyes" aria-hidden="true"></span></span><span class="reel-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M10 8.4 16 12l-6 3.6z" stroke-linejoin="round"/></svg></span></button></div>
   </footer>
 </div>
 
@@ -1209,7 +1216,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v160 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v161 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
