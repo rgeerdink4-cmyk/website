@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v154 -->
+<!-- versie: 2026-08-06-mobiel-v155 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -301,14 +301,15 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
   .contact-email { font-size: 17px; }
   footer { grid-template-columns: 1fr !important; gap: 22px !important;
            justify-items: center; text-align: center; padding: 34px 20px 42px !important; }
-  /* Footer CSS sits later in the file, so these need !important */
-  .footer-copy { position: static !important; transform: none !important;
-                 order: 4 !important; right: auto !important; top: auto !important;
+  /* Volgorde op mobiel: knop, contact, copyright.
+     De footer-CSS staat verderop in het bestand, vandaar !important. */
+  .footer-reel-slot { order: 1 !important; }
+  .footer-contact   { order: 2 !important; }
+  .footer-copy { order: 3 !important; position: static !important;
+                 transform: none !important; right: auto !important; top: auto !important;
                  text-align: center !important; }
-    .social-icons { justify-content: center !important; }
+  .social-icons { justify-content: center !important; }
   .to-top { padding: 40px 0 32px; }
-
-  .footer-copy { order: 3; }
 }
 
 @media (max-width: 600px) {
@@ -470,7 +471,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
   .reel-btn { width: 96px; height: 96px; font-size: 15px; }
   .reel-btn.floating { bottom: 22px; margin-left: -48px; }
   /* Eigen rij bovenaan, boven het contactblok */
-  .footer-reel-slot { grid-column: 1 / -1; justify-self: center !important; order: 1;
+  .footer-reel-slot { grid-column: 1 / -1; justify-self: center !important; order: 1 !important;
                       width: 96px; height: 96px; margin-bottom: 4px; }
   }
 
@@ -1206,7 +1207,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v154 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v155 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
