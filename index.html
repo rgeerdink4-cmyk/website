@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v149 -->
+<!-- versie: 2026-08-06-mobiel-v150 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -809,10 +809,10 @@ const fullSrcs = {
 const PAGE_ORDER = ['work', 'about'];
 
 let switching = false;
-function showPage(name) {
+function showPage(name, navLink) {
   const target = document.getElementById('page-'+name);
   const current = document.querySelector('.page.active');
-  const link = (window.event && window.event.target) || null;
+  const link = navLink || (window.event && window.event.target) || null;
   if (switching || current === target) return;
   switching = true;
 
@@ -1172,7 +1172,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v149 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v150 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
@@ -1227,6 +1227,57 @@ console.log('%c index.html versie 2026-08-06-mobiel-v149 ', 'background:#00FF87;
   window.addEventListener('resize', update);
   document.addEventListener('click', () => setTimeout(update, 600));
   update();
+})();
+
+
+// Op touchapparaten van pagina wisselen door horizontaal te vegen.
+// Verticaal scrollen moet gewoon blijven werken, dus de richting bepaalt alles.
+(function () {
+  if (!window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
+
+  let x0 = 0, y0 = 0, t0 = 0, tracking = false, decided = false, horizontal = false;
+
+  document.addEventListener('touchstart', e => {
+    if (e.touches.length !== 1) { tracking = false; return; }
+    // Niet vegen binnen de lightbox of over bedieningselementen
+    if (e.target.closest('#lb, button, a, video')) { tracking = false; return; }
+    const t = e.touches[0];
+    x0 = t.clientX; y0 = t.clientY; t0 = Date.now();
+    tracking = true; decided = false; horizontal = false;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', e => {
+    if (!tracking || decided) return;
+    const t = e.touches[0];
+    const dx = Math.abs(t.clientX - x0);
+    const dy = Math.abs(t.clientY - y0);
+    if (dx > 12 || dy > 12) {
+      decided = true;
+      horizontal = dx > dy * 1.5;
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchend', e => {
+    if (!tracking || !horizontal) { tracking = false; return; }
+    tracking = false;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - x0;
+    const dt = Date.now() - t0;
+    // Genoeg afstand, of een korte snelle veeg
+    if (Math.abs(dx) < 60 && !(Math.abs(dx) > 35 && dt < 300)) return;
+
+    const current = document.querySelector('.page.active');
+    if (!current) return;
+    const i = PAGE_ORDER.indexOf(current.id.replace('page-', ''));
+    const next = dx < 0 ? i + 1 : i - 1;
+    if (next < 0 || next >= PAGE_ORDER.length) return;
+
+    const name = PAGE_ORDER[next];
+    const link = document.querySelector(
+      name === 'work' ? '.nav-left .nav-link' : '.nav-right .nav-link'
+    );
+    showPage(name, link);
+  }, { passive: true });
 })();
 
 </script>
