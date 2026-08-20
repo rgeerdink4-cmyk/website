@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v173 -->
+<!-- versie: 2026-08-06-mobiel-v174 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -437,7 +437,8 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 .exp-card-title { font-family: 'Amarante', cursive; font-size: 19px; color: var(--accent);
                   text-transform: uppercase; line-height: 1.2; margin-bottom: 12px; }
 .exp-card-text { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.7); }
-.about-tools { width: 100%; margin-bottom: 8px; }
+.about-tools { width: 100%; margin-bottom: 30px; }
+.about-tools:last-of-type { margin-bottom: 8px; }
 .footer-contact { position: relative; display: flex; flex-direction: column;
                   align-items: center; gap: 2px; }
 /* SHOWREEL-KNOP — twee exemplaren die elkaar afwisselen door te schalen.
@@ -756,9 +757,16 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
       <span class="tool">Photoshop</span>
       <span class="tool outline">Blender</span>
       <span class="tool outline">Figma</span>
+    </div>
+  </div>
+  <div class="about-tools">
+    <span class="about-section-label reveal">Plug-ins</span>
+    <div class="tools reveal">
       <span class="tool">RubberHose</span>
       <span class="tool">Element 3D</span>
       <span class="tool">Lottie</span>
+      <span class="tool">Trapcode Particular</span>
+      <span class="tool">Duik</span>
     </div>
   </div>
   <div class="about-exp">
@@ -1218,7 +1226,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v173 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v174 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
