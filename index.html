@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v193 -->
+<!-- versie: 2026-08-06-mobiel-v194 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -540,6 +540,17 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
   .toolbox-row { grid-template-columns: 1fr; gap: 12px; padding: 18px 18px; }
   .toolbox-label { font-size: 10px; letter-spacing: 0.2em; }
 }
+
+/* Rollen onder de projecttekst, zelfde vorm als de tool-knoppen */
+#lb-roles { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px; }
+#lb-roles:empty { display: none; }
+.lb-role { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
+           letter-spacing: 0.04em; color: var(--accent); white-space: nowrap;
+           border: 1px solid rgba(0,255,135,0.3); border-radius: 3px; padding: 6px 12px; }
+@media (max-width: 1024px) {
+  #lb-roles { gap: 6px; margin-top: 13px; }
+  .lb-role { font-size: 11px; padding: 5px 10px; }
+}
 </style>
 </head>
 <body>
@@ -848,6 +859,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
   <div id="lb-info">
     <span id="lb-client"></span>
     <p id="lb-text"></p>
+    <div id="lb-roles"></div>
   </div>
   <button onclick="closeLb()">✕ Sluiten</button>
 </div>
@@ -856,15 +868,15 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 // Context shown under each video in the lightbox. Leave the text empty to hide it.
 const captions = {
   reel: { client: '', text: '' },
-  v1: { client: 'Nike — Portals', text: 'Highlights van een negen maanden durend animatieproject voor Nike, bestaande uit meer dan 30 animaties. Binnen een team van illustratoren, animatoren en een composer nam ik het grootste deel van het animatiewerk voor mijn rekening en bracht ik de illustraties tot leven.' },
-  v2: { client: 'GGD Twente — Zo nuchter zijn we niet', text: 'Voor een campagne van GGD Twente is deze animatie gemaakt om aandacht te vragen voor het hoge alcoholgebruik in Twente. Het doel was om bewustwording te creëren en het gesprek hierover op gang te brengen. Ik was betrokken bij de ontwikkeling van het storyboard en script, werkte de cardboard-stijl en illustraties uit en was verantwoordelijk voor de animatie.' },
-  v3: { client: 'High Tech Twente — Ontdek High Tech Twente', text: 'In opdracht van Artica is voor het regionale samenwerkingsverband High Tech Twente een promo-animatie ontwikkeld ter ondersteuning van de nieuwe branding. Mijn taak was om het aangeleverde storyboard te vertalen naar een kwalitatieve en aantrekkelijke illustratiestijl en deze vervolgens met animatie tot leven te brengen.' },
-  v4: { client: 'AskUI — Explanimation', text: 'Een explanimation ontwikkeld voor AskUI, waarin wordt uitgelegd hoe het AI-gedreven automatiseringsplatform werkt en welke voordelen het biedt. Mijn taak was om de speelse en dynamische visuele stijl te combineren met de bestaande merkidentiteit en het verhaal helder en toegankelijk te vertalen naar animatie.' },
-  v5: { client: 'Gemeente Hengelo — Participatiewet', text: 'In opdracht van Creative Bastards is deze explanimation ontwikkeld, waarin de belangrijkste onderdelen van de Participatiewet op een heldere en toegankelijke manier worden uitgelegd. Mijn taak was om de duidelijke visuele stijl te vertalen naar een eenvoudig en begrijpelijk verhaal en dit door middel van animatie tot leven te brengen. Daarbij hield ik rekening met een diverse doelgroep, zodat de boodschap voor iedereen toegankelijk en begrijpelijk bleef.' },
-  v6: { client: 'Philley — Een verdraaid makkelijk flesje!', text: 'Voor Pelle Trading B.V. is een promotionele explanimation ontwikkeld voor de introductie van Philley. De animatie laat de tekortkomingen van traditionele babyvoedingsverpakkingen zien en laat zien hoe Philley hiervoor een praktische oplossing biedt. Ik was verantwoordelijk voor de ontwikkeling van het storyboard en script, waarbij de focus lag op herkenbare situaties en humor. Vervolgens heb ik een heldere visuele stijl ontwikkeld en deze met animatie tot leven gebracht.' },
-  v7: { client: 'Apollo Tyres — EnduRace RT2', text: 'Voor Apollo Tyres is een promotionele animatie ontwikkeld voor de introductie van de EnduRace RT2, een premium trailerband ontworpen voor gebruik op de weg, in alle seizoenen en met een hoge laadcapaciteit. Door CGI en motion design te combineren, heb ik een hoogwaardige en visueel krachtige animatie gecreëerd waarin de eigenschappen en prestaties van de band op een heldere en aantrekkelijke manier worden gepresenteerd.' },
-  v8: { client: 'SafanDarley — Machine Connect App', text: 'Voor SafanDarley is een promotionele animatie ontwikkeld die de werking van de Machine Connect App en de voordelen ten opzichte van de concurrentie op een heldere manier uitlegt. Ik vertaalde het verhaal van SafanDarley naar een passend storyboard en script en ontwikkelde vervolgens een vlotte illustratiestijl die aansluit bij de branding. Van illustratie tot animatie heb ik het project volledig uitgewerkt tot een sterk en samenhangend eindproduct.' },
-  v9: { client: 'UNCOMMON — Showreel', text: 'Deze showreel is ontwikkeld voor webstudio UNCOMMON als promotie van hun werk. Op basis van aangeleverde portfolio-assets kreeg ik volledige creatieve vrijheid om te experimenteren met dynamische transities en een vloeiende flow. Het resultaat is een energieke showreel waarin verschillende projecten op een natuurlijke en verrassende manier in elkaar overvloeien.' },
+  v1: { client: 'Nike — Portals', text: 'Highlights van een negen maanden durend animatieproject voor Nike, bestaande uit meer dan 30 animaties. Binnen een team van illustratoren, animatoren en een composer nam ik het grootste deel van het animatiewerk voor mijn rekening en bracht ik de illustraties tot leven.', roles: ['Animatie'] },
+  v2: { client: 'GGD Twente — Zo nuchter zijn we niet', text: 'Voor een campagne van GGD Twente is deze animatie gemaakt om aandacht te vragen voor het hoge alcoholgebruik in Twente. Het doel was om bewustwording te creëren en het gesprek hierover op gang te brengen. Ik was betrokken bij de ontwikkeling van het storyboard en script, werkte de cardboard-stijl en illustraties uit en was verantwoordelijk voor de animatie.', roles: ['Concept', 'Storyboarding', 'Illustratie', 'Animatie'] },
+  v3: { client: 'High Tech Twente — Ontdek High Tech Twente', text: 'In opdracht van Artica is voor het regionale samenwerkingsverband High Tech Twente een promo-animatie ontwikkeld ter ondersteuning van de nieuwe branding. Mijn taak was om het aangeleverde storyboard te vertalen naar een kwalitatieve en aantrekkelijke illustratiestijl en deze vervolgens met animatie tot leven te brengen.', roles: ['Illustratie', 'Animatie'] },
+  v4: { client: 'AskUI — Explanimation', text: 'Een explanimation ontwikkeld voor AskUI, waarin wordt uitgelegd hoe het AI-gedreven automatiseringsplatform werkt en welke voordelen het biedt. Mijn taak was om de speelse en dynamische visuele stijl te combineren met de bestaande merkidentiteit en het verhaal helder en toegankelijk te vertalen naar animatie.', roles: ['Illustratie', 'Animatie'] },
+  v5: { client: 'Gemeente Hengelo — Participatiewet', text: 'In opdracht van Creative Bastards is deze explanimation ontwikkeld, waarin de belangrijkste onderdelen van de Participatiewet op een heldere en toegankelijke manier worden uitgelegd. Mijn taak was om de duidelijke visuele stijl te vertalen naar een eenvoudig en begrijpelijk verhaal en dit door middel van animatie tot leven te brengen. Daarbij hield ik rekening met een diverse doelgroep, zodat de boodschap voor iedereen toegankelijk en begrijpelijk bleef.', roles: ['Illustratie', 'Animatie'] },
+  v6: { client: 'Philley — Een verdraaid makkelijk flesje!', text: 'Voor Pelle Trading B.V. is een promotionele explanimation ontwikkeld voor de introductie van Philley. De animatie laat de tekortkomingen van traditionele babyvoedingsverpakkingen zien en laat zien hoe Philley hiervoor een praktische oplossing biedt. Ik was verantwoordelijk voor de ontwikkeling van het storyboard en script, waarbij de focus lag op herkenbare situaties en humor. Vervolgens heb ik een heldere visuele stijl ontwikkeld en deze met animatie tot leven gebracht.', roles: ['Concept', 'Storyboarding', 'Illustratie', 'Animatie'] },
+  v7: { client: 'Apollo Tyres — EnduRace RT2', text: 'Voor Apollo Tyres is een promotionele animatie ontwikkeld voor de introductie van de EnduRace RT2, een premium trailerband ontworpen voor gebruik op de weg, in alle seizoenen en met een hoge laadcapaciteit. Door CGI en motion design te combineren, heb ik een hoogwaardige en visueel krachtige animatie gecreëerd waarin de eigenschappen en prestaties van de band op een heldere en aantrekkelijke manier worden gepresenteerd.', roles: ['Motion Graphics'] },
+  v8: { client: 'SafanDarley — Machine Connect App', text: 'Voor SafanDarley is een promotionele animatie ontwikkeld die de werking van de Machine Connect App en de voordelen ten opzichte van de concurrentie op een heldere manier uitlegt. Ik vertaalde het verhaal van SafanDarley naar een passend storyboard en script en ontwikkelde vervolgens een vlotte illustratiestijl die aansluit bij de branding. Van illustratie tot animatie heb ik het project volledig uitgewerkt tot een sterk en samenhangend eindproduct.', roles: ['Concept', 'Storyboarding', 'Illustratie', 'Animatie'] },
+  v9: { client: 'UNCOMMON — Showreel', text: 'Deze showreel is ontwikkeld voor webstudio UNCOMMON als promotie van hun werk. Op basis van aangeleverde portfolio-assets kreeg ik volledige creatieve vrijheid om te experimenteren met dynamische transities en een vloeiende flow. Het resultaat is een energieke showreel waarin verschillende projecten op een natuurlijke en verrassende manier in elkaar overvloeien.', roles: ['Motion Graphics', 'Post-Edit'] },
 };
 
 const fullSrcs = {
@@ -943,6 +955,14 @@ function openLb(id) {
   const info = document.getElementById('lb-info');
   document.getElementById('lb-client').textContent = cap.client || '';
   document.getElementById('lb-text').textContent = cap.text || '';
+  const rolesEl = document.getElementById('lb-roles');
+  rolesEl.innerHTML = '';
+  (cap.roles || []).forEach(r => {
+    const s = document.createElement('span');
+    s.className = 'lb-role';
+    s.textContent = r;
+    rolesEl.appendChild(s);
+  });
   info.classList.toggle('hidden', !cap.client && !cap.text);
 
   // Pauzeer het raster; anders vecht de reel om bandbreedte met negen previews
@@ -1241,7 +1261,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v193 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v194 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
