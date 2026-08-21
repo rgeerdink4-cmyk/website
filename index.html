@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v198 -->
+<!-- versie: 2026-08-06-mobiel-v200 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -692,6 +692,17 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
       </div>
     </div>
     </div>
+      <div class="work-item full" onclick="openLb('v10')">
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="vredestein-full.m4v" type="video/mp4">
+        <source src="vredestein_full.m4v" type="video/mp4">
+        <source src="vredestein_full.mp4" type="video/mp4">
+      </video>
+      <div class="work-item-info">
+        <span class="work-item-client">Vredestein</span>
+        <p class="work-item-title"></p>
+      </div>
+    </div>
   </main>
   <div class="to-top">
     <button onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Naar boven">
@@ -876,7 +887,8 @@ const captions = {
   v6: { client: 'Philley — Een verdraaid makkelijk flesje!', text: 'Voor Pelle Trading B.V. is een promotionele explanimation ontwikkeld voor de introductie van Philley. De animatie laat de tekortkomingen van traditionele babyvoedingsverpakkingen zien en laat zien hoe Philley hiervoor een praktische oplossing biedt. Ik was verantwoordelijk voor de ontwikkeling van het storyboard en script, waarbij de focus lag op herkenbare situaties en humor. Vervolgens heb ik een heldere visuele stijl ontwikkeld en deze met animatie tot leven gebracht.', roles: ['Concept', 'Storyboard/Script', 'Illustratie', 'Animatie', 'Sound Design', 'Post-Edit'] },
   v7: { client: 'Apollo Tyres — EnduRace RT2', text: 'Voor Apollo Tyres is een promotionele animatie ontwikkeld voor de introductie van de EnduRace RT2, een premium trailerband ontworpen voor gebruik op de weg, in alle seizoenen en met een hoge laadcapaciteit. Door CGI en motion design te combineren, heb ik een hoogwaardige en visueel krachtige animatie gecreëerd waarin de eigenschappen en prestaties van de band op een heldere en aantrekkelijke manier worden gepresenteerd.', roles: ['Motion Graphics', 'VFX', 'Sound Design', 'Post-Edit'] },
   v8: { client: 'SafanDarley — Machine Connect App', text: 'Voor SafanDarley is een promotionele animatie ontwikkeld die de werking van de Machine Connect App en de voordelen ten opzichte van de concurrentie op een heldere manier uitlegt. Ik vertaalde het verhaal van SafanDarley naar een passend storyboard en script en ontwikkelde vervolgens een vlotte illustratiestijl die aansluit bij de branding. Van illustratie tot animatie heb ik het project volledig uitgewerkt tot een sterk en samenhangend eindproduct.', roles: ['Concept', 'Storyboard/Script', 'Illustratie', 'Animatie', 'Sound Design', 'Post-Edit'] },
-  v9: { client: 'UNCOMMON — Showreel', text: 'Deze showreel is ontwikkeld voor webstudio UNCOMMON als promotie van hun werk. Op basis van aangeleverde portfolio-assets kreeg ik volledige creatieve vrijheid om te experimenteren met dynamische transities en een vloeiende flow. Het resultaat is een energieke showreel waarin verschillende projecten op een natuurlijke en verrassende manier in elkaar overvloeien.', roles: ['Motion Graphics', 'Post-Edit', 'Sound Design'] },
+  v9: { client: 'UNCOMMON — Showreel', text: 'Deze showreel is ontwikkeld voor webstudio UNCOMMON als promotie van hun werk. Op basis van aangeleverde portfolio-assets kreeg ik volledige creatieve vrijheid om te experimenteren met dynamische transities en een vloeiende flow. Het resultaat is een energieke showreel waarin verschillende projecten op een natuurlijke en verrassende manier in elkaar overvloeien.', roles: ['Motion Graphics', 'Sound Design', 'Post-Edit'] },
+  v10: { client: 'Vredestein', text: '', roles: [] },
 };
 
 const fullSrcs = {
@@ -890,6 +902,7 @@ const fullSrcs = {
   v7: ['apollo-full.m4v', 'apollo_full.m4v', 'apollo_full.mp4'],
   v8: ['safandarley-full.m4v', 'safandarley_full.m4v', 'safandarley_full.mp4'],
   v9: ['uncommon-full.m4v', 'uncommon_full.m4v', 'uncommon_full.mp4'],
+  v10: ['vredestein-full.m4v', 'vredestein_full.m4v', 'vredestein_full.mp4'],
 };
 
 // PAGE SWITCHING
@@ -1261,7 +1274,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v198 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v200 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
