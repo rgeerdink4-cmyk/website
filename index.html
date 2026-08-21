@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v186 -->
+<!-- versie: 2026-08-06-mobiel-v193 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -118,8 +118,7 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
 #lb-client { font-family: 'Amarante', cursive; font-size: 20px; color: var(--accent);
              text-transform: uppercase; display: block; margin-bottom: 6px; }
 #lb-text { font-size: 14px; line-height: 1.75; color: rgba(255,255,255,0.72);
-           white-space: pre-line; text-align: justify; text-justify: inter-word; hyphens: auto;
-           text-align-last: center; }
+           white-space: pre-line; text-align: justify; text-justify: inter-word; hyphens: auto; }
 #lb-info { max-width: min(860px, 92vw); text-align: center; }
 #lb button { color: #fff; background: none; border: 1px solid rgba(255,255,255,0.3); padding: 10px 28px;
              font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
@@ -857,15 +856,15 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 // Context shown under each video in the lightbox. Leave the text empty to hide it.
 const captions = {
   reel: { client: '', text: '' },
-  v1: { client: 'Nike — Portals', text: 'Highlights van een negen maanden durend animatieproject voor Nike, bestaande uit meer dan 30 animaties. Binnen een team van illustratoren, animatoren en een composer nam ik het grootste deel van het animatiewerk voor mijn rekening en bracht ik de illustraties tot leven.\n\nCredits:  Aart Bakker  ·  Alexandra Danila  ·  Jacek Selanski  ·  Robert Geerdink' },
-  v2: { client: 'GGD Twente — Zo nuchter zijn we niet', text: 'Voor een campagne van GGD Twente is deze animatie gemaakt om aandacht te vragen voor het hoge alcoholgebruik in Twente. Het doel was om bewustwording te creëren en het gesprek hierover op gang te brengen. Ik was betrokken bij de ontwikkeling van het storyboard en script, werkte de cardboard-stijl en illustraties uit en was verantwoordelijk voor de animatie.\n\nCredits:  Daniël Bol  ·  Aart Bakker  ·  Robert Geerdink' },
-  v3: { client: 'High Tech Twente — Ontdek High Tech Twente', text: 'In opdracht van Artica is voor het regionale samenwerkingsverband High Tech Twente een promo-animatie ontwikkeld ter ondersteuning van de nieuwe branding. Mijn taak was om het aangeleverde storyboard te vertalen naar een kwalitatieve en aantrekkelijke illustratiestijl en deze vervolgens met animatie tot leven te brengen.\n\nCredits:  Aart Bakker  ·  Robert Geerdink' },
-  v4: { client: 'AskUI — Explanimation', text: 'Een explanimation ontwikkeld voor AskUI, waarin wordt uitgelegd hoe het AI-gedreven automatiseringsplatform werkt en welke voordelen het biedt. Mijn taak was om de speelse en dynamische visuele stijl te combineren met de bestaande merkidentiteit en het verhaal helder en toegankelijk te vertalen naar animatie.\n\nCredits:  Alexandra Danila  ·  Robert Geerdink' },
-  v5: { client: 'Gemeente Hengelo — Participatiewet', text: 'Deze explanimation legt de belangrijkste onderdelen van de Participatiewet op een heldere en toegankelijke manier uit. De focus ligt op hoe statushouders ondersteund kunnen worden bij het vinden van een plek op de Nederlandse arbeidsmarkt. Een duidelijke visuele stijl en een eenvoudig verhaal brengen complexe informatie terug tot een begrijpelijke animatie, afgestemd op een diverse doelgroep zodat de boodschap voor iedereen toegankelijk is.' },
-  v6: { client: 'Philley — Een verdraaid makkelijk flesje!', text: 'Voor Pelle Trading B.V. is een promotionele explanimation ontwikkeld voor de introductie van Philley. De animatie laat op een luchtige en herkenbare manier de tekortkomingen van traditionele babyvoedingsverpakkingen zien en hoe Philley hiervoor een praktische oplossing biedt. Met herkenbare situaties, humor en een heldere visuele stijl worden de voordelen van het product toegankelijk en overtuigend overgebracht.' },
-  v7: { client: 'Apollo Tyres — EnduRace RT2', text: 'Voor Apollo Tyres is een promotionele animatie ontwikkeld voor de introductie van de EnduRace RT2, een premium trailerband ontworpen voor gebruik op de weg, in alle seizoenen en met een hoge laadcapaciteit. Binnen deze productie komen CGI en motion design samen tot een hoogwaardige en visueel krachtige animatie, waarin de eigenschappen en prestaties van de band op een heldere en aantrekkelijke manier worden gepresenteerd.' },
-  v8: { client: 'SafanDarley — Machine Connect App', text: 'Voor SafanDarley is een promotionele animatie ontwikkeld die de werking van de Machine Connect App en de voordelen ten opzichte van de concurrent op een heldere manier uitlegt. Een unieke animatiestijl, aansluitend op de visuele identiteit van het bedrijf, presenteert de functionaliteiten van de app op een toegankelijke manier.' },
-  v9: { client: 'UNCOMMON — Showreel', text: 'Deze showreel is ontwikkeld voor webstudio UNCOMMON als promotie van hun werk. Aan de hand van aangeleverde portfolio-assets was er volledige creatieve vrijheid om te experimenteren met dynamische transities en een vloeiende flow. Het resultaat is een energieke showreel waarin de verschillende projecten op een natuurlijke en verrassende manier in elkaar overlopen.' },
+  v1: { client: 'Nike — Portals', text: 'Highlights van een negen maanden durend animatieproject voor Nike, bestaande uit meer dan 30 animaties. Binnen een team van illustratoren, animatoren en een composer nam ik het grootste deel van het animatiewerk voor mijn rekening en bracht ik de illustraties tot leven.' },
+  v2: { client: 'GGD Twente — Zo nuchter zijn we niet', text: 'Voor een campagne van GGD Twente is deze animatie gemaakt om aandacht te vragen voor het hoge alcoholgebruik in Twente. Het doel was om bewustwording te creëren en het gesprek hierover op gang te brengen. Ik was betrokken bij de ontwikkeling van het storyboard en script, werkte de cardboard-stijl en illustraties uit en was verantwoordelijk voor de animatie.' },
+  v3: { client: 'High Tech Twente — Ontdek High Tech Twente', text: 'In opdracht van Artica is voor het regionale samenwerkingsverband High Tech Twente een promo-animatie ontwikkeld ter ondersteuning van de nieuwe branding. Mijn taak was om het aangeleverde storyboard te vertalen naar een kwalitatieve en aantrekkelijke illustratiestijl en deze vervolgens met animatie tot leven te brengen.' },
+  v4: { client: 'AskUI — Explanimation', text: 'Een explanimation ontwikkeld voor AskUI, waarin wordt uitgelegd hoe het AI-gedreven automatiseringsplatform werkt en welke voordelen het biedt. Mijn taak was om de speelse en dynamische visuele stijl te combineren met de bestaande merkidentiteit en het verhaal helder en toegankelijk te vertalen naar animatie.' },
+  v5: { client: 'Gemeente Hengelo — Participatiewet', text: 'In opdracht van Creative Bastards is deze explanimation ontwikkeld, waarin de belangrijkste onderdelen van de Participatiewet op een heldere en toegankelijke manier worden uitgelegd. Mijn taak was om de duidelijke visuele stijl te vertalen naar een eenvoudig en begrijpelijk verhaal en dit door middel van animatie tot leven te brengen. Daarbij hield ik rekening met een diverse doelgroep, zodat de boodschap voor iedereen toegankelijk en begrijpelijk bleef.' },
+  v6: { client: 'Philley — Een verdraaid makkelijk flesje!', text: 'Voor Pelle Trading B.V. is een promotionele explanimation ontwikkeld voor de introductie van Philley. De animatie laat de tekortkomingen van traditionele babyvoedingsverpakkingen zien en laat zien hoe Philley hiervoor een praktische oplossing biedt. Ik was verantwoordelijk voor de ontwikkeling van het storyboard en script, waarbij de focus lag op herkenbare situaties en humor. Vervolgens heb ik een heldere visuele stijl ontwikkeld en deze met animatie tot leven gebracht.' },
+  v7: { client: 'Apollo Tyres — EnduRace RT2', text: 'Voor Apollo Tyres is een promotionele animatie ontwikkeld voor de introductie van de EnduRace RT2, een premium trailerband ontworpen voor gebruik op de weg, in alle seizoenen en met een hoge laadcapaciteit. Door CGI en motion design te combineren, heb ik een hoogwaardige en visueel krachtige animatie gecreëerd waarin de eigenschappen en prestaties van de band op een heldere en aantrekkelijke manier worden gepresenteerd.' },
+  v8: { client: 'SafanDarley — Machine Connect App', text: 'Voor SafanDarley is een promotionele animatie ontwikkeld die de werking van de Machine Connect App en de voordelen ten opzichte van de concurrentie op een heldere manier uitlegt. Ik vertaalde het verhaal van SafanDarley naar een passend storyboard en script en ontwikkelde vervolgens een vlotte illustratiestijl die aansluit bij de branding. Van illustratie tot animatie heb ik het project volledig uitgewerkt tot een sterk en samenhangend eindproduct.' },
+  v9: { client: 'UNCOMMON — Showreel', text: 'Deze showreel is ontwikkeld voor webstudio UNCOMMON als promotie van hun werk. Op basis van aangeleverde portfolio-assets kreeg ik volledige creatieve vrijheid om te experimenteren met dynamische transities en een vloeiende flow. Het resultaat is een energieke showreel waarin verschillende projecten op een natuurlijke en verrassende manier in elkaar overvloeien.' },
 };
 
 const fullSrcs = {
@@ -1242,7 +1241,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v186 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v193 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
