@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v201 -->
+<!-- versie: 2026-08-06-mobiel-v203 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -82,10 +82,15 @@ nav { position: fixed;  top: 0; left: 0; right: 0; z-index: 500; display: flex; 
 .photo-wrap { display: block; width: 100%; max-width: 300px; }
 .about-section-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 20px; display: block; }
 .tools { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; }
-.tool { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.03em; white-space: nowrap; color: var(--accent); border: 1px solid rgba(0,255,135,0.3); padding: 8px 14px; display: inline-block; transition: border-color 0.2s, color 0.2s; }
-.tool:hover { border-color: var(--accent); color: #fff; }
-
-.tool:hover 
+.tool { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.03em;
+        white-space: nowrap; color: var(--accent); border: 1px solid rgba(0,255,135,0.3);
+        padding: 8px 14px; display: inline-block; border-radius: 3px;
+        /* padding meeanimeren duwt de buren opzij bij hover */
+        transition: border-color 0.25s, color 0.25s, background 0.25s,
+                    padding 0.3s cubic-bezier(0.2,0.9,0.3,1),
+                    letter-spacing 0.3s cubic-bezier(0.2,0.9,0.3,1); }
+.tool:hover { border-color: var(--accent); color: var(--bg); background: var(--accent);
+              padding: 8px 20px; letter-spacing: 0.06em; }
 
 /* CONTACT */
 .contact-page { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 48px 80px; text-align: center; }
@@ -430,8 +435,12 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 .about-expertise { width: 100%; margin-bottom: 44px; }
 .exp-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .exp-card { border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 26px 28px;
-            background: rgba(255,255,255,0.02); transition: border-color 0.25s, background 0.25s; }
-.exp-card:hover { border-color: rgba(0,255,135,0.35); background: rgba(0,255,135,0.03); }
+            background: rgba(255,255,255,0.02);
+            transition: border-color 0.3s, background 0.3s, transform 0.35s cubic-bezier(0.2,0.9,0.3,1); }
+.exp-card:hover { border-color: rgba(0,255,135,0.35); background: rgba(0,255,135,0.03);
+                  transform: translateY(-4px); }
+.exp-card-title { transition: transform 0.35s cubic-bezier(0.2,0.9,0.3,1); }
+.exp-card:hover .exp-card-title { transform: translateX(4px); }
 .exp-card-title { font-family: 'Amarante', cursive; font-size: 19px; color: var(--accent);
                   text-transform: uppercase; line-height: 1.2; margin-bottom: 12px; }
 .exp-card-text { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.7); }
@@ -756,7 +765,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
     <div class="about-text-col">
       <p class="about-body reveal">Al ruim 11 jaar werk ik als animator/motion designer. In die tijd heb ik aan uiteenlopende producties gewerkt, van motion graphics en explanimations tot VFX, illustratie en video editing.</p>
       <p class="about-body reveal">Die brede ervaring heeft me geleerd om ideeën en complexe onderwerpen te vertalen naar heldere, aantrekkelijke visuele verhalen. Ik denk graag mee over concept en vorm, maar ben vooral sterk in het uitwerken van ideeën tot een overtuigende animatie.</p>
-      <p class="about-body reveal">Naast mijn werk rijd ik graag motor, speel ik drums in een bandje, en leg ik mijn reizen vast op mijn fotocamera. Samen met mijn vriendin Femke woon ik in Ootmarsum.</p>
+      <p class="about-body reveal">Naast mijn werk rijd ik graag motor, speel ik drums in een bandje, en leg ik mijn reizen vast op mijn fotocamera. Samen met mijn vriendin woon ik in Ootmarsum.</p>
     </div>
   </div>
   <div class="about-expertise">
@@ -1274,7 +1283,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v201 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v203 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
