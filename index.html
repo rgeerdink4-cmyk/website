@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v207 -->
+<!-- versie: 2026-08-06-mobiel-v208 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -542,6 +542,8 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
                  background: rgba(255,255,255,0.02); overflow: hidden; }
 .toolbox-row { display: grid; grid-template-columns: 116px 1fr; gap: 20px;
                align-items: center; padding: 20px 26px; }
+/* Eén rij zonder label: knoppen over de volle breedte */
+.toolbox-row.single { grid-template-columns: 1fr; padding: 22px 26px; }
 .toolbox-row + .toolbox-row { border-top: 1px solid rgba(255,255,255,0.08); }
 .toolbox-label { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.24em;
                  text-transform: uppercase; color: rgba(255,255,255,0.4); }
@@ -793,10 +795,9 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
     </div>
   </div>
   <div class="about-toolbox">
-    <span class="about-section-label reveal">Waar ik mee werk</span>
+    <span class="about-section-label reveal">Tools</span>
     <div class="toolbox-panel reveal">
-      <div class="toolbox-row">
-        <span class="toolbox-label">Tools</span>
+      <div class="toolbox-row single">
         <div class="tools">
           <span class="tool">After Effects</span>
           <span class="tool">Illustrator</span>
@@ -804,16 +805,6 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
           <span class="tool">Photoshop</span>
           <span class="tool">Blender</span>
           <span class="tool">Figma</span>
-        </div>
-      </div>
-      <div class="toolbox-row">
-        <span class="toolbox-label">Plug-ins</span>
-        <div class="tools">
-          <span class="tool">RubberHose</span>
-          <span class="tool">Element 3D</span>
-          <span class="tool">Lottie</span>
-          <span class="tool">Trapcode Particular</span>
-          <span class="tool">Duik</span>
         </div>
       </div>
     </div>
@@ -1286,7 +1277,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v207 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v208 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
