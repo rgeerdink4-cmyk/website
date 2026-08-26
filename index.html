@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v208 -->
+<!-- versie: 2026-08-06-mobiel-v211 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -542,8 +542,6 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
                  background: rgba(255,255,255,0.02); overflow: hidden; }
 .toolbox-row { display: grid; grid-template-columns: 116px 1fr; gap: 20px;
                align-items: center; padding: 20px 26px; }
-/* Eén rij zonder label: knoppen over de volle breedte */
-.toolbox-row.single { grid-template-columns: 1fr; padding: 22px 26px; }
 .toolbox-row + .toolbox-row { border-top: 1px solid rgba(255,255,255,0.08); }
 .toolbox-label { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.24em;
                  text-transform: uppercase; color: rgba(255,255,255,0.4); }
@@ -565,6 +563,14 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
   #lb-roles { gap: 6px; margin-top: 13px; }
   .lb-role { font-size: 11px; padding: 5px 10px; }
 }
+/* Laadindicator in de lightbox */
+#lb-loading { position: absolute; inset: 0; display: none; align-items: center;
+              justify-content: center; pointer-events: none; }
+#lb.loading #lb-loading { display: flex; }
+#lb-loading span { width: 34px; height: 34px; border-radius: 50%;
+                   border: 2px solid rgba(0,255,135,0.25); border-top-color: var(--accent);
+                   animation: lb-spin 0.8s linear infinite; }
+@keyframes lb-spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
@@ -795,9 +801,10 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
     </div>
   </div>
   <div class="about-toolbox">
-    <span class="about-section-label reveal">Tools</span>
+    <span class="about-section-label reveal">Waar ik mee werk</span>
     <div class="toolbox-panel reveal">
-      <div class="toolbox-row single">
+      <div class="toolbox-row">
+        <span class="toolbox-label">Tools</span>
         <div class="tools">
           <span class="tool">After Effects</span>
           <span class="tool">Illustrator</span>
@@ -805,6 +812,16 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
           <span class="tool">Photoshop</span>
           <span class="tool">Blender</span>
           <span class="tool">Figma</span>
+        </div>
+      </div>
+      <div class="toolbox-row">
+        <span class="toolbox-label">Plug-ins</span>
+        <div class="tools">
+          <span class="tool">RubberHose</span>
+          <span class="tool">Element 3D</span>
+          <span class="tool">Lottie</span>
+          <span class="tool">Trapcode Particular</span>
+          <span class="tool">Duik</span>
         </div>
       </div>
     </div>
@@ -870,6 +887,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 <!-- LIGHTBOX -->
 <div id="lb" onclick="if(event.target===this)closeLb()">
   <video id="lb-vid" controls playsinline preload="auto"></video>
+  <div id="lb-loading"><span></span></div>
   <div id="lb-info">
     <span id="lb-client"></span>
     <p id="lb-text"></p>
@@ -895,7 +913,7 @@ const captions = {
 };
 
 const fullSrcs = {
-  reel: ['reel-full.m4v', 'reel_full.m4v', 'reel_full.mp4'],
+  reel: ['showreel-full.m4v', 'showreel_full.m4v', 'showreel_full.mp4'],
   v1: ['nike-full.m4v', 'nike_full.m4v', 'nike_full.mp4'],
   v2: ['ggd-full.m4v', 'ggd_full.m4v', 'ggd_full.mp4'],
   v3: ['hightech-full.m4v', 'hightech_full.m4v', 'hightech_full.mp4'],
@@ -959,12 +977,22 @@ function openLb(id) {
   // Start muted (browsers block autoplay with sound), then unmute once playback runs.
   // The fallback filenames need the same treatment, otherwise they stay silent.
   const start = () => {
+    lb.classList.add('loading');
     lbVid.muted = true;
+    lbVid.preload = 'auto';
     lbVid.load();
-    lbVid.play().then(() => {
-      lbVid.muted = false;
-      lbVid.volume = 1;
-    }).catch(() => {});
+    // Pas spelen zodra de browser genoeg heeft om door te kunnen lopen;
+    // meteen starten gaf haperingen aan het begin van grote bestanden.
+    const go = () => {
+      lb.classList.remove('loading');
+      lbVid.play().then(() => {
+        lbVid.muted = false;
+        lbVid.volume = 1;
+      }).catch(() => {});
+    };
+    lbVid.addEventListener('canplaythrough', go, { once: true });
+    // Valt de verbinding tegen, dan na 2,5 seconde toch beginnen
+    setTimeout(() => { if (lb.classList.contains('loading')) go(); }, 2500);
   };
   lbVid.onerror = () => { i++; if (i < list.length) { lbVid.src = list[i]; start(); } };
   const cap = captions[id] || {};
@@ -990,7 +1018,9 @@ function openLb(id) {
   start();
 }
 function closeLb() {
-  lbVid.pause(); lbVid.src=''; lb.style.display='none'; document.body.style.overflow='';
+  lbVid.pause(); lbVid.src=''; lb.style.display='none';
+  lb.classList.remove('loading');
+  document.body.style.overflow='';
   // Laat het raster zelf weer bepalen wat er speelt
   document.querySelectorAll('.work-item video').forEach(v => {
     const r = v.getBoundingClientRect();
@@ -1277,7 +1307,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v208 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v211 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
