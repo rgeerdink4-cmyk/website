@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v211 -->
+<!-- versie: 2026-08-06-mobiel-v212 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -1021,11 +1021,24 @@ function closeLb() {
   lbVid.pause(); lbVid.src=''; lb.style.display='none';
   lb.classList.remove('loading');
   document.body.style.overflow='';
-  // Laat het raster zelf weer bepalen wat er speelt
-  document.querySelectorAll('.work-item video').forEach(v => {
+  // Laat het raster zelf weer bepalen wat er speelt.
+  // Op mobiel start alleen de video die het meest in beeld staat.
+  const vids = Array.from(document.querySelectorAll('.work-item video'));
+  const visible = vids.filter(v => {
     const r = v.getBoundingClientRect();
-    if (r.top < window.innerHeight && r.bottom > 0) { v._wanted = true; v.play().catch(()=>{}); }
+    return r.top < window.innerHeight && r.bottom > 0;
   });
+  if (typeof isSmall !== 'undefined' && isSmall) {
+    const best = visible.sort((a, b) => {
+      const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
+      const va = Math.min(ra.bottom, innerHeight) - Math.max(ra.top, 0);
+      const vb = Math.min(rb.bottom, innerHeight) - Math.max(rb.top, 0);
+      return vb - va;
+    })[0];
+    if (best) { best._wanted = true; best.play().catch(()=>{}); }
+  } else {
+    visible.forEach(v => { v._wanted = true; v.play().catch(()=>{}); });
+  }
 }
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeLb(); });
 
@@ -1240,8 +1253,15 @@ setTimeout(positionCircle, 300);
 
 // Grid videos: loop a 10 second window, starting at a per-project offset
 const startOffsets = { nike: 0.8, ggd: 4, hightech: 6, participatie: 5, apollo: 15, safandarley: 0.5, uncommon: 13 };
-// Videos load and play only when they are near the viewport. Loading all nine
-// at once saturated mobile bandwidth, which is why playback started late.
+// Videos laden en spelen alleen in de buurt van het scherm.
+// Op mobiel speelt er hoogstens één tegelijk: negen tegelijk laden verzadigde
+// de verbinding, en elke terugsprong kostte opnieuw buffertijd.
+const isSmall = window.matchMedia('(max-width: 1024px)').matches
+             || window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+// Op een telefoon een langer venster: minder terugspringen = minder haperen
+const LOOP_WINDOW = isSmall ? 20 : 10;
+
 document.querySelectorAll('.work-item video').forEach(v => {
   const first = v.querySelector('source');
   const file = first ? first.getAttribute('src') : '';
@@ -1250,64 +1270,81 @@ document.querySelectorAll('.work-item video').forEach(v => {
 
   v.removeAttribute('autoplay');
   v.removeAttribute('loop');
+  v.setAttribute('playsinline', '');
+  v.setAttribute('webkit-playsinline', '');
+  v.muted = true;                       // iOS speelt alleen zonder geluid vanzelf
   v._start = start;
 
-  // Keep playback inside the ten-second window from the offset. Checking both
-  // edges matters because load() resets currentTime to 0, which is how videos
-  // ended up playing from the beginning.
+  // Blijf binnen het venster vanaf het startpunt. Beide randen controleren is
+  // nodig omdat load() de video terugzet op nul.
   const enforce = () => {
-    if (start <= 0) return false;
-    if (v.readyState < 1) return false;
-    if (v.currentTime < start - 0.3 || v.currentTime >= start + 10) {
-      v.currentTime = start;
-      return true;
-    }
-    return false;
+    if (v.readyState < 1) return;
+    if (start > 0 && v.currentTime < start - 0.3) { v.currentTime = start; return; }
+    if (v.currentTime >= start + LOOP_WINDOW) { v.currentTime = start; }
   };
 
   v.addEventListener('loadedmetadata', () => { enforce(); if (v._wanted) v.play().catch(()=>{}); });
   v.addEventListener('loadeddata', enforce);
   v.addEventListener('play', enforce);
-  v.addEventListener('timeupdate', () => {
-    if (start > 0) { enforce(); return; }
-    if (v.currentTime >= 10) v.currentTime = 0;
-  });
+  v.addEventListener('timeupdate', enforce);
   v.addEventListener('ended', () => { v.currentTime = start; if (v._wanted) v.play().catch(()=>{}); });
 });
 
-// Only what is on screen gets full bandwidth; the rest stays paused.
-const vidObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    const v = e.target;
-    if (e.isIntersecting) {
-      v._wanted = true;
-      // Raise the priority, but never call load() on a video that already has
-      // data: that would rewind it to zero.
-      if (v.preload !== 'auto') {
-        v.preload = 'auto';
-        if (v.readyState === 0) v.load();
-      }
-      if (v._start > 0 && v.readyState >= 1 && v.currentTime < v._start - 0.3) {
-        v.currentTime = v._start;
-      }
-      v.play().catch(()=>{});
-    } else {
-      v._wanted = false;
-      v.pause();
-    }
-  });
-}, { rootMargin: '400px 0px', threshold: 0.01 });
+const allVids = Array.from(document.querySelectorAll('.work-item video'));
 
-document.querySelectorAll('.work-item video').forEach(v => vidObserver.observe(v));
+function wake(v) {
+  v._wanted = true;
+  if (v.preload !== 'auto') {
+    v.preload = 'auto';
+    if (v.readyState === 0) v.load();   // nooit op een video die al data heeft
+  }
+  if (v._start > 0 && v.readyState >= 1 && v.currentTime < v._start - 0.3) {
+    v.currentTime = v._start;
+  }
+  v.play().catch(()=>{});
+}
+
+function sleep(v) {
+  v._wanted = false;
+  v.pause();
+}
+
+if (isSmall) {
+  // Eén video tegelijk: degene die het meest in beeld staat
+  let current = null;
+  const seen = new Map();
+
+  const pick = () => {
+    let best = null, bestRatio = 0;
+    seen.forEach((ratio, v) => { if (ratio > bestRatio) { bestRatio = ratio; best = v; } });
+    if (best === current) return;
+    if (current) sleep(current);
+    current = best;
+    if (current) wake(current);
+  };
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => seen.set(e.target, e.isIntersecting ? e.intersectionRatio : 0));
+    pick();
+  }, { rootMargin: '0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
+
+  allVids.forEach(v => io.observe(v));
+} else {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => e.isIntersecting ? wake(e.target) : sleep(e.target));
+  }, { rootMargin: '300px 0px', threshold: 0.01 });
+
+  allVids.forEach(v => io.observe(v));
+}
 
 document.addEventListener('visibilitychange', () => {
-  document.querySelectorAll('.work-item video').forEach(v => {
+  allVids.forEach(v => {
     if (document.hidden) v.pause();
     else if (v._wanted) v.play().catch(()=>{});
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v211 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v212 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
