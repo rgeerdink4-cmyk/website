@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v215 -->
+<!-- versie: 2026-08-06-mobiel-v218 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -25,7 +25,14 @@ nav { position: fixed;  top: 0; left: 0; right: 0; z-index: 500; display: flex; 
 /* De actieve pagina kleurt groen; die regel ontbrak, dus ook klikken gaf geen kleur */
 .nav-link.active { color: var(--accent); }
 .nav-link.active::after { display: none !important; }
-.nav-link:hover { color: var(--accent); transform: scale(1.12); }
+/* Het woord rolt omhoog weg en een groene kopie komt eronder in beeld.
+   De hoogte is vastgezet op de regelhoogte, zodat er precies één woord past. */
+.nav-link { overflow: hidden; line-height: 1.15; height: 1.15em; }
+.nav-roll { display: block; transition: transform 0.35s cubic-bezier(0.2,0.9,0.3,1); }
+.nav-roll em { font-style: normal; display: block; color: var(--accent); }
+.nav-link:hover .nav-roll { transform: translateY(-1.15em); }
+/* Actieve pagina toont de groene helft al */
+.nav-link.active .nav-roll { transform: translateY(-1.15em); }
 .nav-link::after { display: none !important; }
 
 .logo img { height: 28px; width: auto; display: block;  }
@@ -597,14 +604,14 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 
 <nav>
   <div class="nav-left">
-    <a href="#" class="nav-link active" onclick="showPage('work', this)">Werk</a>
+    <a href="#" class="nav-link active" onclick="showPage('work', this)"><span class="nav-roll">Werk<em>Werk</em></span></a>
   </div>
   <a href="#" class="logo" onclick="showPage('work', document.querySelector('.nav-left .nav-link'))" style="position:relative;display:block;">
   <div id="lottie-logo" style="height:100px;width:178px;display:block;overflow:hidden;position:relative;z-index:1;"></div>
   <div id="lottie-text" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:404px;height:404px;pointer-events:none;z-index:2;"></div>
 </a>
   <div class="nav-right">
-    <a href="#" class="nav-link" onclick="showPage('about', this)">Over</a>
+    <a href="#" class="nav-link" onclick="showPage('about', this)"><span class="nav-roll">Over<em>Over</em></span></a>
   </div>
 </nav>
 
@@ -1347,7 +1354,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v215 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v218 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
@@ -1545,6 +1552,8 @@ Promise.all(aboutPhotos.map((_, i) => resolveOne(i))).then(() => {
     if (Math.abs(dx) > 45) switchPhoto(dx < 0 ? 1 : -1);
   }, { passive: true });
 })();
+
+
 
 </script>
 </body>
