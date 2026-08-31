@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v220 -->
+<!-- versie: 2026-08-06-mobiel-v221 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -589,6 +589,24 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 /* Niveau binnen de talen-knop, gedempt zodat de taal voorop staat */
 .tool em { font-style: normal; opacity: 0.55; margin-left: 5px; }
 .tool:hover em { opacity: 0.75; }
+
+/* CV-download onderaan de over-pagina */
+.cv-download { width: 100%; display: flex; justify-content: center; margin-top: 40px; }
+.cv-btn { display: inline-flex; align-items: center; gap: 14px; text-decoration: none;
+          font-family: 'Amarante', cursive; font-size: 17px; letter-spacing: 0.04em;
+          text-transform: uppercase; color: var(--accent);
+          border: 1.5px solid rgba(0,255,135,0.45); border-radius: 999px;
+          padding: 14px 26px;
+          transition: background 0.25s, color 0.25s, border-color 0.25s; }
+.cv-btn:hover { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.cv-btn-icon { display: flex; }
+.cv-btn-icon svg { width: 19px; height: 19px; display: block;
+                   transition: transform 0.3s cubic-bezier(0.2,0.9,0.3,1); }
+.cv-btn:hover .cv-btn-icon svg { transform: translateY(3px); }
+@media (max-width: 1024px) {
+  .cv-download { margin-top: 30px; }
+  .cv-btn { font-size: 15px; padding: 12px 22px; gap: 11px; }
+}
 </style>
 </head>
 <body>
@@ -871,6 +889,17 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
         </div>
       </div>
     </div>
+  </div>
+  <div class="cv-download reveal">
+    <a href="cv-robert-geerdink.pdf" target="_blank" rel="noopener" class="cv-btn">
+      <span class="cv-btn-label">Download mijn CV</span>
+      <span class="cv-btn-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 4v11"/><path d="M7.5 10.5 12 15l4.5-4.5"/><path d="M5 19h14"/>
+        </svg>
+      </span>
+    </a>
   </div>
 </main>
   <div class="to-top">
@@ -1361,7 +1390,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v220 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v221 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
