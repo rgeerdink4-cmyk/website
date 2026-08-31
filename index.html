@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v221 -->
+<!-- versie: 2026-08-06-mobiel-v224 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -556,6 +556,8 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
                  background: rgba(255,255,255,0.02); overflow: hidden; }
 .toolbox-row { display: grid; grid-template-columns: 116px 1fr; gap: 20px;
                align-items: center; padding: 20px 26px; }
+/* Eén rij zonder label: knoppen over de volle breedte */
+.toolbox-row.single { grid-template-columns: 1fr; padding: 22px 26px; }
 .toolbox-row + .toolbox-row { border-top: 1px solid rgba(255,255,255,0.08); }
 .toolbox-label { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.24em;
                  text-transform: uppercase; color: rgba(255,255,255,0.4); }
@@ -586,9 +588,6 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
                    animation: lb-spin 0.8s linear infinite; }
 @keyframes lb-spin { to { transform: rotate(360deg); } }
 
-/* Niveau binnen de talen-knop, gedempt zodat de taal voorop staat */
-.tool em { font-style: normal; opacity: 0.55; margin-left: 5px; }
-.tool:hover em { opacity: 0.75; }
 
 /* CV-download onderaan de over-pagina */
 .cv-download { width: 100%; display: flex; justify-content: center; margin-top: 40px; }
@@ -837,10 +836,9 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
     </div>
   </div>
   <div class="about-toolbox">
-    <span class="about-section-label reveal">Skills</span>
+    <span class="about-section-label reveal">Tools</span>
     <div class="toolbox-panel reveal">
-      <div class="toolbox-row">
-        <span class="toolbox-label">Tools</span>
+      <div class="toolbox-row single">
         <div class="tools">
           <span class="tool">After Effects</span>
           <span class="tool">Illustrator</span>
@@ -849,14 +847,6 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
           <span class="tool">Blender</span>
           <span class="tool">Figma</span>
           <span class="tool">Lottie</span>
-        </div>
-      </div>
-      <div class="toolbox-row">
-        <span class="toolbox-label">Talen</span>
-        <div class="tools">
-          <span class="tool">Nederlands <em>Moedertaal</em></span>
-          <span class="tool">Engels <em>Volledig professioneel</em></span>
-          <span class="tool">Duits <em>Basis</em></span>
         </div>
       </div>
     </div>
@@ -891,7 +881,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
     </div>
   </div>
   <div class="cv-download reveal">
-    <a href="cv-robert-geerdink.pdf" target="_blank" rel="noopener" class="cv-btn">
+    <a href="cv_robert-geerdink.pdf" target="_blank" rel="noopener" class="cv-btn">
       <span class="cv-btn-label">Download mijn CV</span>
       <span class="cv-btn-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
@@ -1390,7 +1380,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v221 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v224 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
@@ -1601,6 +1591,31 @@ Promise.all(aboutPhotos.map((_, i) => resolveOne(i))).then(() => {
 })();
 
 
+
+
+// De CV-knop zoekt zelf welke bestandsnaam bestaat. Vindt hij niets, dan
+// verdwijnt de knop, zodat er nooit een dode link op de site staat.
+(function () {
+  const btn = document.querySelector('.cv-btn');
+  if (!btn) return;
+  const wrap = btn.closest('.cv-download');
+  const names = ['cv_robert-geerdink.pdf', 'cv-robert-geerdink.pdf',
+                 'cv_robert_geerdink.pdf', 'CV-Robert-Geerdink.pdf',
+                 'cv.pdf', 'CV.pdf'];
+  let i = 0;
+  const tryNext = () => {
+    if (i >= names.length) { if (wrap) wrap.style.display = 'none'; return; }
+    const url = names[i++];
+    fetch(url, { method: 'HEAD' })
+      .then(r => {
+        const type = r.headers.get('content-type') || '';
+        if (r.ok && type.indexOf('html') === -1) btn.href = url;
+        else tryNext();
+      })
+      .catch(tryNext);
+  };
+  tryNext();
+})();
 
 </script>
 </body>
