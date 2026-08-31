@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v212 -->
+<!-- versie: 2026-08-06-mobiel-v213 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -571,6 +571,16 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
                    border: 2px solid rgba(0,255,135,0.25); border-top-color: var(--accent);
                    animation: lb-spin 0.8s linear infinite; }
 @keyframes lb-spin { to { transform: rotate(360deg); } }
+
+/* Talen: tekstueel in plaats van knoppen, zodat het niveau leesbaar blijft */
+.langs { display: flex; flex-wrap: wrap; gap: 8px 26px; }
+.lang { font-family: 'DM Sans', sans-serif; font-size: 14px; color: rgba(255,255,255,0.6);
+        white-space: nowrap; }
+.lang b { font-weight: 500; color: var(--accent); margin-right: 6px; }
+@media (max-width: 1024px) {
+  .langs { justify-content: center; gap: 6px 20px; }
+  .lang { font-size: 13px; }
+}
 </style>
 </head>
 <body>
@@ -801,7 +811,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
     </div>
   </div>
   <div class="about-toolbox">
-    <span class="about-section-label reveal">Waar ik mee werk</span>
+    <span class="about-section-label reveal">Skills</span>
     <div class="toolbox-panel reveal">
       <div class="toolbox-row">
         <span class="toolbox-label">Tools</span>
@@ -822,6 +832,14 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
           <span class="tool">Lottie</span>
           <span class="tool">Trapcode Particular</span>
           <span class="tool">Duik</span>
+        </div>
+      </div>
+      <div class="toolbox-row">
+        <span class="toolbox-label">Talen</span>
+        <div class="langs">
+          <span class="lang"><b>Nederlands</b> Moedertaal</span>
+          <span class="lang"><b>Engels</b> Volledig professioneel</span>
+          <span class="lang"><b>Duits</b> Basis</span>
         </div>
       </div>
     </div>
@@ -1344,7 +1362,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v212 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v213 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
