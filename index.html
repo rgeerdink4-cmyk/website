@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v226 -->
+<!-- versie: 2026-08-06-mobiel-v228 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Robert Geerdink — Motion Design</title>
@@ -552,22 +552,9 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
 
 /* TOOLS & PLUG-INS — één paneel, zelfde taal als de expertise-kaarten */
 .about-toolbox { width: 100%; margin-bottom: 10px; }
-.toolbox-panel { border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
-                 background: rgba(255,255,255,0.02); overflow: hidden; }
-.toolbox-row { display: grid; grid-template-columns: 116px 1fr; gap: 20px;
-               align-items: center; padding: 20px 26px; }
-/* Eén rij zonder label: knoppen over de volle breedte */
-.toolbox-row.single { grid-template-columns: 1fr; padding: 22px 26px; }
-.toolbox-row + .toolbox-row { border-top: 1px solid rgba(255,255,255,0.08); }
-.toolbox-label { font-family: 'DM Sans', sans-serif; font-size: 10px; letter-spacing: 0.24em;
-                 text-transform: uppercase; color: rgba(255,255,255,0.4); }
-@media (max-width: 1024px) {
+.toolbox-row + @media (max-width: 1024px) {
   /* Label en knoppen gecentreerd op smalle schermen */
-  .toolbox-row { grid-template-columns: 1fr; gap: 12px; padding: 18px 16px;
-                 justify-items: center; text-align: center; }
-  .toolbox-label { font-size: 10px; letter-spacing: 0.2em; }
-  .toolbox-row .tools { justify-content: center; }
-}
+    }
 
 /* Rollen onder de projecttekst, zelfde vorm als de tool-knoppen */
 #lb-roles { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px; }
@@ -792,7 +779,7 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
   <main class="about-page">
   <div class="about-top">
     <h1 class="about-heading reveal">OVER MIJ</h1>
-    <p style="font-family:'DM Sans',sans-serif;font-size:14px;color:#00FF87;text-transform:uppercase;margin-top:6px;margin-bottom:0;letter-spacing:0.1em;font-weight:500;" class="reveal">Robert (Rob) Geerdink — 35 — Motion Designer</p>
+    <p style="font-family:'DM Sans',sans-serif;font-size:14px;color:#00FF87;text-transform:uppercase;margin-top:6px;margin-bottom:0;letter-spacing:0.1em;font-weight:500;" class="reveal">Robert Geerdink — 35 — Motion Designer</p>
     
   </div>
   <div class="about-mid">
@@ -837,18 +824,14 @@ nav .nav-link { position: relative; z-index: 5; pointer-events: auto; }
   </div>
   <div class="about-toolbox">
     <span class="about-section-label reveal">Tools</span>
-    <div class="toolbox-panel reveal">
-      <div class="toolbox-row single">
-        <div class="tools">
-          <span class="tool">After Effects</span>
-          <span class="tool">Illustrator</span>
-          <span class="tool">Premiere</span>
-          <span class="tool">Photoshop</span>
-          <span class="tool">Blender</span>
-          <span class="tool">Figma</span>
-          <span class="tool">Lottie</span>
-        </div>
-      </div>
+    <div class="tools reveal">
+      <span class="tool">After Effects</span>
+      <span class="tool">Illustrator</span>
+      <span class="tool">Premiere</span>
+      <span class="tool">Photoshop</span>
+      <span class="tool">Blender</span>
+      <span class="tool">Figma</span>
+      <span class="tool">Lottie</span>
     </div>
   </div>
   <div class="about-exp">
@@ -1380,7 +1363,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v226 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v228 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
