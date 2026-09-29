@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v244 -->
+<!-- versie: 2026-08-06-mobiel-v245 -->
 <meta charset="UTF-8">
 <meta name="description" content="Robert Geerdink is motion designer en animator uit Ootmarsum. Portfolio met 2D-animatie, motion graphics, explanimations, VFX en illustratie voor onder andere Nike, Vredestein en Apollo Tyres.">
 <meta property="og:type" content="website">
@@ -1300,7 +1300,10 @@ setTimeout(positionCircle, 300);
 
 
 // Grid videos: loop a 10 second window, starting at a per-project offset
-const startOffsets = { nike: 0.8, ggd: 4, hightech: 6, participatie: 5, apollo: 15, safandarley: 0.5, uncommon: 13 };
+// De previews zijn al ingekort vanaf hun startpunt, dus hier geen sprong meer.
+// Valt een preview weg en wordt de volledige video gebruikt, dan begint die
+// bij nul; dat is hooguit een ander fragment, geen storing.
+const startOffsets = {};
 // Videos laden en spelen alleen in de buurt van het scherm.
 // Op mobiel speelt er hoogstens één tegelijk: negen tegelijk laden verzadigde
 // de verbinding, en elke terugsprong kostte opnieuw buffertijd.
@@ -1409,7 +1412,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v244 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v245 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
