@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v239 -->
+<!-- versie: 2026-08-06-mobiel-v241 -->
 <meta charset="UTF-8">
 <meta name="description" content="Robert Geerdink is motion designer en animator uit Ootmarsum. Portfolio met 2D-animatie, motion graphics, explanimations, VFX en illustratie voor onder andere Nike, Vredestein en Apollo Tyres.">
 <meta property="og:type" content="website">
@@ -263,12 +263,16 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
 .work-item {
   transform: scale(0.92);
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .work-item.in-view {
   transform: scale(1);
 }
 .work-item video {
   transition: transform 0.6s ease;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 .work-item:hover video {
   transform: scale(1.04);
@@ -319,6 +323,10 @@ footer span { font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.1
   /* Start the grid higher so the logo and circle overlap the first video */
   .work-list { padding: 140px 14px 14px !important; gap: 14px !important; }
   .nav-link { font-size: 16px !important; }
+  /* Geen schaalanimatie op mobiel: een spelende video schalen dwingt de
+     browser elk frame opnieuw te tekenen en dat loopt zichtbaar stroef. */
+  .work-item, .work-item.in-view { transform: none !important; will-change: auto; }
+  .work-item video { transition: none; }
   /* One column, every video the same size and full width */
   .clearfix { display: flex !important; flex-direction: column !important; gap: 14px !important; }
   .work-item.full, .work-item.half-left, .work-item.half-right {
@@ -1339,6 +1347,23 @@ function sleep(v) {
   v.pause();
 }
 
+// Laden en afspelen zijn gescheiden. Eerst alvast binnenhalen als een video
+// in de buurt komt, pas afspelen als hij echt in beeld staat. Zo hoeft er bij
+// het starten niets meer opgehaald te worden en scheelt dat het haperen.
+const preloadObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const v = e.target;
+    if (v.preload !== 'auto') {
+      v.preload = 'auto';
+      if (v.readyState === 0) v.load();
+    }
+    preloadObserver.unobserve(v);      // één keer is genoeg
+  });
+}, { rootMargin: isSmall ? '600px 0px' : '900px 0px', threshold: 0 });
+
+allVids.forEach(v => preloadObserver.observe(v));
+
 if (isSmall) {
   // Eén video tegelijk: degene die het meest in beeld staat
   let current = null;
@@ -1362,7 +1387,7 @@ if (isSmall) {
 } else {
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => e.isIntersecting ? wake(e.target) : sleep(e.target));
-  }, { rootMargin: '300px 0px', threshold: 0.01 });
+  }, { rootMargin: '150px 0px', threshold: 0.01 });
 
   allVids.forEach(v => io.observe(v));
 }
@@ -1374,7 +1399,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v239 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v241 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
