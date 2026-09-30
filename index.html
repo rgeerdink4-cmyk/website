@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<!-- versie: 2026-08-06-mobiel-v245 -->
+<!-- versie: 2026-08-06-mobiel-v246 -->
 <meta charset="UTF-8">
 <meta name="description" content="Robert Geerdink is motion designer en animator uit Ootmarsum. Portfolio met 2D-animatie, motion graphics, explanimations, VFX en illustratie voor onder andere Nike, Vredestein en Apollo Tyres.">
 <meta property="og:type" content="website">
@@ -1235,6 +1235,11 @@ window.addEventListener('DOMContentLoaded', function() {
         container.classList.remove('intro-hide');
         if (navText) navText.classList.remove('intro-hide');
         requestAnimationFrame(() => intro.remove());
+        // Intro voorbij: de video's die in beeld staan mogen nu starten
+        window.introBusy = false;
+        document.querySelectorAll('.work-item video').forEach(v => {
+          if (v._wanted) v.play().catch(()=>{});
+        });
       }, 1000);
     }, 2500);
   }
@@ -1343,8 +1348,13 @@ document.querySelectorAll('.work-item video').forEach(v => {
 
 const allVids = Array.from(document.querySelectorAll('.work-item video'));
 
+// Tijdens het introscherm mag er nog niets spelen; de video's zijn dan toch
+// niet zichtbaar. Ze worden wel alvast geladen.
+window.introBusy = true;
+
 function wake(v) {
   v._wanted = true;
+  if (window.introBusy) return;   // pas spelen als de intro klaar is
   if (v.preload !== 'auto') {
     v.preload = 'auto';
     if (v.readyState === 0) v.load();   // nooit op een video die al data heeft
@@ -1405,6 +1415,12 @@ if (isSmall) {
   allVids.forEach(v => io.observe(v));
 }
 
+setTimeout(() => {
+  if (!window.introBusy) return;
+  window.introBusy = false;
+  allVids.forEach(v => { if (v._wanted) v.play().catch(()=>{}); });
+}, 6000);
+
 document.addEventListener('visibilitychange', () => {
   allVids.forEach(v => {
     if (document.hidden) v.pause();
@@ -1412,7 +1428,7 @@ document.addEventListener('visibilitychange', () => {
   });
 });
 
-console.log('%c index.html versie 2026-08-06-mobiel-v245 ', 'background:#00FF87;color:#000');
+console.log('%c index.html versie 2026-08-06-mobiel-v246 ', 'background:#00FF87;color:#000');
 
 // Photo above text on narrow screens, regardless of CSS support
 (function () {
